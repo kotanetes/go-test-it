@@ -38,6 +38,38 @@
                     {"id":"24","employee_name":"Doris Wilder","employee_salary":"85600","employee_age":"23","profile_image":""}
                     ]
                 }
+        },
+        {
+            "scenario":"sample test 2",
+            "url":"http://localhost:8080/query",
+            "type": "graphql",
+            "method":"POST",
+            "body": "query{teacher{firstName}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                  "teacher": [
+                    {
+                      "firstName": "John"
+                    },
+                    {
+                      "firstName": "Jones"
+                    },
+                    {
+                      "firstName": "Jeevan"
+                    },
+                    {
+                      "firstName": "Mohammed"
+                    },
+                    {
+                      "firstName": "Cameron"
+                    },
+                    {
+                      "firstName": "Arnold"
+                    }
+                  ]
+                }
+              }
         }
     ]
 }
