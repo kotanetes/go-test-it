@@ -16,8 +16,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var errChan = make(chan error, 0)
-
 func init() {
 	// Log as JSON instead of the default ASCII formatter.
 	logrus.SetFormatter(&logrus.JSONFormatter{})

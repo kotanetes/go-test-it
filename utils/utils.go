@@ -32,7 +32,7 @@ func FinalResult(result map[string]bool) {
 	generateReport(passed, failed)
 
 	if failed > 0 {
-		fmt.Errorf("Result: FAILED")
+		fmt.Errorf("Result: %v", "FAILED")
 	}
 }
 
@@ -52,5 +52,7 @@ func generateReport(passed, failed int32) {
 		logrus.Error(err)
 	}
 	defer f.Close()
-	pie.Render(chart.PNG, f)
+	if err = pie.Render(chart.PNG, f); err != nil {
+		logrus.Error(err)
+	}
 }
