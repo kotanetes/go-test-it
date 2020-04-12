@@ -2,13 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"sync"
 
 	"github.com/kotanetes/go-test-it/model"
 	"github.com/kotanetes/go-test-it/service"
+	"github.com/kotanetes/go-test-it/utils"
 	"github.com/sirupsen/logrus"
 )
 
@@ -24,41 +27,61 @@ func init() {
 
 	// Only log the warning severity or above.
 	logrus.SetLevel(logrus.DebugLevel)
+
+	// intializing remote service
+	service.InitHTTPClient(&http.Client{})
 }
 
-func main() {
-	fmt.Println("hello")
+var (
+	filePath, scenarioName *string
+)
 
+func main() {
 	//var testFiles featuresByFiles
 
-	files, err := ioutil.ReadDir("./tests")
+	filePath = flag.String("file-path", "./", "Path to Test Files.")
+	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
+	//uniquePtr := flag.Bool("unique", false, "Measure unique values of a metric.")
+
+	flag.Parse()
+
+	files, err := ioutil.ReadDir(*filePath)
 	if err != nil {
 		logrus.Fatal(err)
 	}
 
 	var wg sync.WaitGroup
 	for _, file := range files {
-		fmt.Println(file.Name())
 		wg.Add(1)
-		go func(fileNmae string) {
+		go func(fileName string, path string) {
+			printFileName(fileName)
 			defer wg.Done()
-			data, err := ioutil.ReadFile("./tests/" + fileNmae)
+			data, err := ioutil.ReadFile(path + fileName)
 			if err != nil {
 				logrus.Fatal(err)
 			}
-			_ = handleTests(data)
+			result, err := handleTests(data)
+			if err != nil {
+				logrus.Fatal(err)
+			}
+			utils.FinalResult(result)
 
-		}(file.Name())
+		}(file.Name(), *filePath)
 	}
 	wg.Wait()
 }
 
-func handleTests(data []byte) (err error) {
+func handleTests(data []byte) (result map[string]bool, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	service.MakeHttpCall(scenarios.Test)
-	return nil
+	return service.MakeHTTPCall(scenarios.Test), nil
+}
+
+func printFileName(fn string) {
+	fmt.Println("##########################################")
+	fmt.Printf("Executing Test File: %v\n", fn)
+	fmt.Println("##########################################")
 }

@@ -18,9 +18,19 @@ const (
 	GraphQL = "graphql"
 )
 
-func doCall(req *http.Request) ([]byte, int) {
+var client remoteClient
 
-	client := &http.Client{}
+type remoteClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
+// InitHTTPClient - intializes httpClient
+// this can be used to mock the http calls for this project
+func InitHTTPClient(c remoteClient) {
+	client = c
+}
+
+func doCall(req *http.Request) ([]byte, int) {
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -36,16 +46,19 @@ func doCall(req *http.Request) ([]byte, int) {
 	return bodyBytes, resp.StatusCode
 }
 
-// MakeHttpCall - performs an http call
-func MakeHttpCall(scenarios model.TestScenario) {
-	for _, test := range scenarios {
-		var (
-			reqBody     []byte
-			err         error
-			requestBody io.Reader
-			body        interface{}
-		)
+// MakeHTTPCall - performs an http call
+func MakeHTTPCall(scenarios model.TestScenario) map[string]bool {
+	var (
+		reqBody     []byte
+		err         error
+		requestBody io.Reader
+		body        interface{}
+	)
 
+	result := make(map[string]interface{})
+	finalResult := make(map[string]bool)
+
+	for _, test := range scenarios {
 		if test.Body != nil {
 			switch test.Type {
 			case GraphQL:
@@ -74,7 +87,7 @@ func MakeHttpCall(scenarios model.TestScenario) {
 		req.Header.Set("Content-Type", "application/json")
 
 		bodyBytes, statusCode := doCall(req)
-		result := make(map[string]interface{}, 0)
+
 		err = json.Unmarshal(bodyBytes, &result)
 		if err != nil {
 			logrus.Error(err)
@@ -83,10 +96,14 @@ func MakeHttpCall(scenarios model.TestScenario) {
 		switch {
 		case statusCode != test.ExpectedStatusCode:
 			logrus.Info(fmt.Sprintf("Test %v failed, expected status %v got %v", test.Scenario, test.ExpectedStatusCode, statusCode))
+			finalResult[test.Scenario] = false
 		case !reflect.DeepEqual(result, test.ExpectedResult):
-			logrus.Info(fmt.Sprintf("est %v failed, expected result is not as return", test.Scenario))
+			logrus.Info(fmt.Sprintf("Test %v failed, retunred response is not as expected", test.Scenario))
+			finalResult[test.Scenario] = false
 		default:
 			logrus.Info(fmt.Sprintf("Test %v Passed", test.Scenario))
+			finalResult[test.Scenario] = true
 		}
 	}
+	return finalResult
 }
