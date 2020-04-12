@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"sync"
 
 	"github.com/kotanetes/go-test-it/model"
@@ -52,23 +53,25 @@ func main() {
 
 	var wg sync.WaitGroup
 	for _, file := range files {
-		wg.Add(1)
-		go func(fileName string, path string) {
-			printFileName(fileName)
-			defer wg.Done()
-			data, err := ioutil.ReadFile(path + fileName)
-			if err != nil {
-				logrus.Fatal(err)
-			}
-			result, err := handleTests(data)
-			if err != nil {
-				logrus.Fatal(err)
-			}
-			utils.FinalResult(result)
+		if strings.Contains(file.Name(), ".json") {
+			wg.Add(1)
+			go func(fileName string, path string) {
+				printFileName(fileName)
+				defer wg.Done()
+				data, err := ioutil.ReadFile(path + fileName)
+				if err != nil {
+					logrus.Fatal(err)
+				}
+				result, err := handleTests(data)
+				if err != nil {
+					logrus.Fatal(err)
+				}
+				utils.FinalResult(result)
 
-		}(file.Name(), *filePath)
+			}(file.Name(), *filePath)
+		}
+		wg.Wait()
 	}
-	wg.Wait()
 }
 
 func handleTests(data []byte) (result map[string]bool, err error) {

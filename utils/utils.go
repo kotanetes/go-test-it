@@ -26,10 +26,14 @@ func FinalResult(result map[string]bool) {
 		}
 	}
 	fmt.Println("##########################################")
-	fmt.Printf("Result: Total Tests:%v, Passed:%v, Failed:%v\n", total, passed, failed)
+	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v\n", total, passed, failed)
 	fmt.Println("##########################################")
 
 	generateReport(passed, failed)
+
+	if failed > 0 {
+		fmt.Errorf("Result: FAILED")
+	}
 }
 
 func generateReport(passed, failed int32) {

@@ -1,9 +1,14 @@
 # Binaries for programs and plugins
+.DS_Store
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+
+# Images
+*.png
+*/*.png
 
 # Test binary, built with `go test -c`
 *.test
