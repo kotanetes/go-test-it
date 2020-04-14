@@ -6,12 +6,13 @@ type FeaturesByFiles map[string]interface{}
 
 // TestModel - decode json file to this struct model
 type TestModel struct {
-	Test TestScenario `json:"tests"`
+	Test []TestScenario `json:"tests"`
 }
 
 // TestScenario - slice of tests
-type TestScenario []struct {
+type TestScenario struct {
 	Scenario string `json:"scenario"`
+	Ignore   bool   `json:"ignore"`
 	Type     string `json:"type"`
 	URL      string `json:"url"`
 	Method   string `json:"method"`

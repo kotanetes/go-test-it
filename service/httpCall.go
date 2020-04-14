@@ -47,18 +47,29 @@ func doCall(req *http.Request) ([]byte, int) {
 }
 
 // MakeHTTPCall - performs an http call
-func MakeHTTPCall(scenarios model.TestScenario) map[string]bool {
+func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 	var (
 		reqBody     []byte
 		err         error
 		requestBody io.Reader
 		body        interface{}
+		ignored     int
 	)
 
-	result := make(map[string]interface{})
 	finalResult := make(map[string]bool)
+	testScenarios := make(map[string]model.TestScenario, 0)
 
-	for _, test := range scenarios {
+	for _, scenario := range scenarios {
+		if !scenario.Ignore {
+			testScenarios[scenario.Scenario] = scenario
+		} else {
+			logrus.Info(fmt.Sprintf("Test %v Ignored", scenario.Scenario))
+			ignored++
+		}
+	}
+
+	for _, test := range testScenarios {
+		result := make(map[string]interface{})
 		if test.Body != nil {
 			switch test.Type {
 			case GraphQL:
@@ -98,6 +109,7 @@ func MakeHTTPCall(scenarios model.TestScenario) map[string]bool {
 			logrus.Info(fmt.Sprintf("Test %v failed, expected status %v got %v", test.Scenario, test.ExpectedStatusCode, statusCode))
 			finalResult[test.Scenario] = false
 		case !reflect.DeepEqual(result, test.ExpectedResult):
+			fmt.Printf("expected:%v,got: %v\n", test.ExpectedResult, result)
 			logrus.Info(fmt.Sprintf("Test %v failed, retunred response is not as expected", test.Scenario))
 			finalResult[test.Scenario] = false
 		default:
@@ -105,5 +117,5 @@ func MakeHTTPCall(scenarios model.TestScenario) map[string]bool {
 			finalResult[test.Scenario] = true
 		}
 	}
-	return finalResult
+	return finalResult, ignored
 }

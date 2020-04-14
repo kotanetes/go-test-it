@@ -60,11 +60,11 @@ func main() {
 				if err != nil {
 					logrus.Fatal(err)
 				}
-				result, err := handleTests(data)
+				result, ignored, err := handleTests(data)
 				if err != nil {
 					logrus.Fatal(err)
 				}
-				utils.FinalResult(result)
+				utils.FinalResult(file.Name(), ignored, result)
 
 			}(file.Name(), *filePath)
 		}
@@ -72,13 +72,14 @@ func main() {
 	}
 }
 
-func handleTests(data []byte) (result map[string]bool, err error) {
+func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	return service.MakeHTTPCall(scenarios.Test), nil
+	result, ignored = service.MakeHTTPCall(scenarios.Test)
+	return result, ignored, nil
 }
 
 func printFileName(fn string) {

@@ -40,7 +40,19 @@
                 }
         },
         {
-            "scenario":"sample test 2",
+          "scenario":"sample test 2",
+          "url":"https://jsonplaceholder.typicode.com/todos/11",
+          "method":"GET",
+          "expectedStatusCode": 200,
+          "expectedResult": {
+            "userId": 1,
+            "id": 11,
+            "title": "vero rerum temporibus dolor",
+            "completed": true
+          }
+        },
+        {
+            "scenario":"sample test 3",
             "url":"http://localhost:8080/query",
             "type": "graphql",
             "method":"POST",
@@ -68,9 +80,21 @@
                       "firstName": "Arnold"
                     }
                   ]
-                },
-                "status":"success"
+                }
               }
+        },
+        {
+          "scenario":"sample test 4",
+          "url":"https://jsonplaceholder.typicode.com/todos/11",
+          "method":"GET",
+          "ignore":true,
+          "expectedStatusCode": 200,
+          "expectedResult": {
+            "userId": 1,
+            "id": 11,
+            "title": "vero rerum temporibus dolor",
+            "completed": true
+          }
         }
     ]
 }
