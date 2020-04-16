@@ -32,17 +32,22 @@ func init() {
 }
 
 var (
-	filePath, scenarioName *string
+	filePath, fileName, scenarioName *string
 )
 
 func main() {
-	//var testFiles featuresByFiles
 
 	filePath = flag.String("file-path", "./", "Path to Test Files.")
+	fileName = flag.String("file-name", "", "Name Of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
 	//uniquePtr := flag.Bool("unique", false, "Measure unique values of a metric.")
 
 	flag.Parse()
+
+	if strings.Contains(*filePath, ".json") {
+		handleSpecificFile(*filePath, *fileName)
+		return
+	}
 
 	files, err := ioutil.ReadDir(*filePath)
 	if err != nil {
@@ -70,6 +75,18 @@ func main() {
 		}
 		wg.Wait()
 	}
+}
+
+func handleSpecificFile(path, fileName string) {
+	data, err := ioutil.ReadFile(path + fileName)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	result, ignored, err := handleTests(data)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	utils.FinalResult(fileName, ignored, result)
 }
 
 func handleTests(data []byte) (result map[string]bool, ignored int, err error) {

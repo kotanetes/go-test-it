@@ -17,7 +17,7 @@ func FinalResult(fileName string, ignored int, result map[string]bool) {
 		passed, failed int32
 	)
 
-	total = len(result)
+	total = len(result) + ignored
 
 	for _, v := range result {
 		if v {
