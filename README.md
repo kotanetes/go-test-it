@@ -1,5 +1,7 @@
 # go-test-it
-Automated regression testing package written in Go.Supports REST API and GraphQL API.
+Automated regression testing package written in Go.This tool supports both REST API and GraphQL API. All you need to do is write json files with all the possible scenarios. examples are available in /tests directory.
+
+Installation instructions are listed below.
 
 ## Pre-Requsite
   Required go(>1.11) installed on machine.
