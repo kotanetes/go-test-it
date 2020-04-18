@@ -9,7 +9,7 @@ import (
 	"github.com/wcharczuk/go-chart"
 )
 
-// FinalResult - prints final result and create pie chart
+// FinalResult evaluates and prints final results based on the given data.
 func FinalResult(fileName string, ignored int, result map[string]bool) {
 
 	var (
@@ -37,6 +37,7 @@ func FinalResult(fileName string, ignored int, result map[string]bool) {
 	}
 }
 
+// generateReport will create a final report as pie chart and save them to a file
 func generateReport(fileName string, ignored int, passed, failed int32) {
 	pie := chart.PieChart{
 		Title:  "Test Result",

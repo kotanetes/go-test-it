@@ -31,6 +31,7 @@ func init() {
 	service.InitHTTPClient(&http.Client{})
 }
 
+// variables used for flag arguments
 var (
 	filePath, fileName, scenarioName *string
 )
@@ -40,7 +41,6 @@ func main() {
 	filePath = flag.String("file-path", "./", "Path to Test Files.")
 	fileName = flag.String("file-name", "", "Name Of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
-	//uniquePtr := flag.Bool("unique", false, "Measure unique values of a metric.")
 
 	flag.Parse()
 
@@ -77,6 +77,8 @@ func main() {
 	}
 }
 
+// handleSpecificFile reads specific json file from the given path
+// thos function read the file and calls the underlying common function.
 func handleSpecificFile(path, fileName string) {
 	data, err := ioutil.ReadFile(path + fileName)
 	if err != nil {
@@ -89,6 +91,8 @@ func handleSpecificFile(path, fileName string) {
 	utils.FinalResult(fileName, ignored, result)
 }
 
+// handleTests unmarshals byte data to TestModel type and pass the scenarios
+// to MakeHTTPCall function that makes calls to URL mentioned in tests.
 func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
@@ -99,6 +103,7 @@ func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
 	return result, ignored, nil
 }
 
+// printFileName prints the file name just before the execution starts
 func printFileName(fn string) {
 	fmt.Println("##########################################")
 	fmt.Printf("Executing Test File: %v\n", fn)

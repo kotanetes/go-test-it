@@ -30,6 +30,9 @@ func InitHTTPClient(c remoteClient) {
 	client = c
 }
 
+// doCall does a http call to service.
+// read the body from http.Response
+// return bosy as byte array.
 func doCall(req *http.Request) ([]byte, int) {
 
 	resp, err := client.Do(req)
@@ -46,7 +49,12 @@ func doCall(req *http.Request) ([]byte, int) {
 	return bodyBytes, resp.StatusCode
 }
 
-// MakeHTTPCall - performs an http call
+// MakeHTTPCall receives the test scenarios and this function handles the scenarios
+// 1. Identify the scenarios are that ignored and seperate rest of them.
+// 2. Loop over the tests and based on the test type form the request body.
+// 3. Create new http Request and make a call to service.
+// 4. Read the http.Response and compare the results with the assertions in scenarios.
+// 5. Generate the Test results and return thwm along with ignored scenarios count.
 func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 	var (
 		reqBody     []byte
