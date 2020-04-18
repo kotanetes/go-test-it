@@ -13,11 +13,23 @@ Installation instructions are listed below.
    ```
 ## Usage
   * Create a JSON file similar to example file in /test/example.json in any directory
-  ```bash
-  go-test-it
-  ```
+  
   * Need help?
   ```bash
   go-test-it -help
   ```
+  * Create a direcotry and add json file, which have all the test scenarios refer to file in /test/example.json
+  * By Default, `go-test-it` will read all .json files in the current directory and run the tests
+     ```bash
+      go-test-it
+      ```
+  * Tool has the ability to run tests in a specific file.
+      ```bash
+      go-test-it -file-path=./rest_services -file-name=service1.json
+      ```     
+  * Ignore Test Scenario
+    * Add indicator `"ignore":true` to the test scenario and tool will skip the test scenario
+    
+ ## Results
+  * Tool generates results as a Pie Chart and also prints the results to console
   
