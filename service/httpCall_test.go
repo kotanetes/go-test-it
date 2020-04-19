@@ -42,10 +42,8 @@ func Test_CompareData(t *testing.T) {
 			"profile_image":   "",
 		}
 
-		final := true
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if !r {
 			t.Errorf("Test %v failed, expected not equeal to got", t.Name())
 		}
 	})
@@ -75,10 +73,8 @@ func Test_CompareData(t *testing.T) {
 			},
 		}
 
-		final := true
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if !r {
 			t.Errorf("%v failed, expected not equal to got", t.Name())
 		}
 	})
@@ -108,10 +104,8 @@ func Test_CompareData(t *testing.T) {
 			},
 		}
 
-		final := false
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if r {
 			t.Errorf("%v failed, expected not equal to got", t.Name())
 		}
 	})
@@ -135,10 +129,8 @@ func Test_CompareData(t *testing.T) {
 			"profile_image":   "",
 		}
 
-		final := false
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if r {
 			t.Errorf("Test %v failed, expected not equeal to got", t.Name())
 		}
 	})
@@ -168,10 +160,8 @@ func Test_CompareData(t *testing.T) {
 			},
 		}
 
-		final := true
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if !r {
 			t.Errorf("%v failed, expected not equal to got", t.Name())
 		}
 	})
@@ -202,10 +192,8 @@ func Test_CompareData(t *testing.T) {
 			},
 		}
 
-		final := false
-
 		r := compareData(t.Name(), result, expected)
-		if r != final {
+		if r {
 			t.Errorf("%v failed, expected not equal to got", t.Name())
 		}
 	})
