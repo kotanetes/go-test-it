@@ -67,7 +67,7 @@ func main() {
 				}
 				result, ignored, err := handleTests(data)
 				if err != nil {
-					logrus.Fatal(err)
+					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
 				utils.FinalResult(file.Name(), ignored, result)
 

@@ -72,7 +72,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 		if !scenario.Ignore {
 			testScenarios[scenario.Scenario] = scenario
 		} else {
-			logrus.Info(fmt.Sprintf("Test %v Ignored", scenario.Scenario))
+			logrus.WithField("scenario", scenario.Scenario).Info(fmt.Sprintf("Test %v Ignored", scenario.Scenario))
 			ignored++
 		}
 	}
