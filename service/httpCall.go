@@ -15,7 +15,8 @@ import (
 
 const (
 	// GraphQL - constant used to check test type
-	GraphQL = "graphql"
+	GraphQL       = "graphql"
+	expectedVsGot = "value for field %v: expected %v ,got %v"
 )
 
 var client remoteClient
@@ -55,7 +56,7 @@ func doCall(req *http.Request) ([]byte, int) {
 // 3. Create new http Request and make a call to service.
 // 4. Read the http.Response and compare the results with the assertions in scenarios.
 // 5. Generate the Test results and return thwm along with ignored scenarios count.
-func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
+func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) {
 	var (
 		reqBody     []byte
 		err         error
@@ -79,7 +80,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 	for _, test := range testScenarios {
 		result := make(map[string]interface{})
 		if test.Body != nil {
-			switch test.Type {
+			switch strings.ToLower(test.Type) {
 			case GraphQL:
 				bodyMap := make(map[string]interface{})
 				bodyMap["query"] = test.Body
@@ -90,6 +91,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 			reqBody, err = json.Marshal(body)
 			if err != nil {
 				logrus.Error(err)
+				return nil, 0, err
 			}
 
 			requestBody = strings.NewReader(string(reqBody))
@@ -98,6 +100,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 		req, err := http.NewRequest(test.Method, test.URL, requestBody)
 		if err != nil {
 			logrus.Error(err)
+			return nil, 0, err
 		}
 
 		if test.Header.Authorization != "" {
@@ -110,20 +113,69 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int) {
 		err = json.Unmarshal(bodyBytes, &result)
 		if err != nil {
 			logrus.Error(err)
+			return nil, 0, err
 		}
 
 		switch {
 		case statusCode != test.ExpectedStatusCode:
-			logrus.Info(fmt.Sprintf("Test %v failed, expected status %v got %v", test.Scenario, test.ExpectedStatusCode, statusCode))
+			logrus.WithField("scenario", test.Scenario).Info(fmt.Sprintf("failed, expected status %v got %v", test.ExpectedStatusCode, statusCode))
 			finalResult[test.Scenario] = false
-		case !reflect.DeepEqual(result, test.ExpectedResult):
-			fmt.Printf("expected:%v,got: %v\n", test.ExpectedResult, result)
-			logrus.Info(fmt.Sprintf("Test %v failed, retunred response is not as expected", test.Scenario))
+		case !compareData(test.Scenario, result, test.ExpectedResult):
+			logrus.WithField("scenario", test.Scenario).Info("failed, retunred response is not as expected")
 			finalResult[test.Scenario] = false
 		default:
-			logrus.Info(fmt.Sprintf("Test %v Passed", test.Scenario))
+			logrus.WithField("scenario", test.Scenario).Info("Passed", test.Scenario)
 			finalResult[test.Scenario] = true
 		}
 	}
-	return finalResult, ignored
+
+	return finalResult, ignored, nil
+}
+
+func compareData(scenario string, result, expectedResult interface{}) bool {
+
+	var res, expRes map[string]interface{}
+
+	if result != nil && expectedResult != nil {
+		res = result.(map[string]interface{})
+		expRes = expectedResult.(map[string]interface{})
+	}
+
+	unMatchCount := 0
+
+	for key, value := range expRes {
+		if value != nil {
+			switch value.(type) {
+			case map[string]interface{}:
+				if res[key] != nil {
+					if !compareData(scenario, res[key], value) {
+						logrus.WithField("scenario", scenario).Errorf(expectedVsGot, key, value, res[key])
+						unMatchCount++
+					}
+				} else {
+					logrus.WithField("scenario", scenario).Errorf("value for field %v in expected is not found in returned response", key)
+					unMatchCount++
+				}
+			case []interface{}:
+				sliceValues := value.([]interface{})
+				sliceResponse := res[key].([]interface{})
+				if len(sliceValues) <= len(sliceResponse) {
+					for i := range sliceValues {
+						if !compareData(scenario, sliceResponse[i], sliceValues[i]) {
+							unMatchCount++
+						}
+					}
+				}
+			default:
+				if !reflect.DeepEqual(value, res[key]) {
+					logrus.WithField("scenario", scenario).Errorf(expectedVsGot, key, value, res[key])
+					unMatchCount++
+				}
+			}
+		}
+	}
+	if unMatchCount > 0 {
+		return false
+	}
+	return true
 }

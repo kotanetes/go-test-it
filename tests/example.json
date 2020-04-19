@@ -48,7 +48,10 @@
             "userId": 1,
             "id": 11,
             "title": "vero rerum temporibus dolor",
-            "completed": true
+            "completed": true,
+            "addtional":{
+              "hey" :"hello"
+            }
           }
         },
         {
@@ -56,6 +59,7 @@
             "url":"http://localhost:8080/query",
             "type": "graphql",
             "method":"POST",
+            "ignore": true,
             "body": "query{teacher{firstName}}",
             "expectedStatusCode": 200,
             "expectedResult": {

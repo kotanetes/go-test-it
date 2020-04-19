@@ -11,16 +11,18 @@ type TestModel struct {
 
 // TestScenario - slice of tests
 type TestScenario struct {
-	Scenario string `json:"scenario"`
-	Ignore   bool   `json:"ignore"`
-	Type     string `json:"type"`
-	URL      string `json:"url"`
-	Method   string `json:"method"`
-	Header   struct {
-		Authorization string `json:"authorization"`
-		ContentType   string `json:"content-type"`
-	} `json:"header"`
+	Scenario           string      `json:"scenario"`
+	Ignore             bool        `json:"ignore"`
+	Type               string      `json:"type"`
+	URL                string      `json:"url"`
+	Method             string      `json:"method"`
+	Header             Header      `json:"header"`
 	Body               interface{} `json:"body"`
 	ExpectedStatusCode int         `json:"expectedStatusCode"`
 	ExpectedResult     interface{} `json:"expectedResult"`
+}
+
+type Header struct {
+	Authorization string `json:"authorization"`
+	ContentType   string `json:"content-type"`
 }

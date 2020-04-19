@@ -99,8 +99,8 @@ func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
 	if err != nil {
 		return nil, 0, err
 	}
-	result, ignored = service.MakeHTTPCall(scenarios.Test)
-	return result, ignored, nil
+	result, ignored, err = service.MakeHTTPCall(scenarios.Test)
+	return result, ignored, err
 }
 
 // printFileName prints the file name just before the execution starts
