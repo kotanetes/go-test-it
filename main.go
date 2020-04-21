@@ -69,12 +69,13 @@ func main() {
 				if err != nil {
 					logrus.Fatal(err)
 				}
-				utils.FinalResult(file.Name(), ignored, result)
+				utils.PrintResults(file.Name(), ignored, result)
 
 			}(file.Name(), *filePath)
 		}
 		wg.Wait()
 	}
+	utils.GenerateReport()
 }
 
 // handleSpecificFile reads specific json file from the given path
@@ -88,7 +89,7 @@ func handleSpecificFile(path, fileName string) {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	utils.FinalResult(fileName, ignored, result)
+	utils.PrintResults(fileName, ignored, result)
 }
 
 // handleTests unmarshals byte data to TestModel type and pass the scenarios
