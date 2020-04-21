@@ -33,5 +33,6 @@ Installation instructions are listed below.
  ## Results
   * Tool generates results as a HTMl Report,Pie Chart and also prints the results to console
     example:
+    
     ![Screenshot](Screen_Shot.png)
   
