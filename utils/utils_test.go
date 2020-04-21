@@ -5,19 +5,21 @@ import (
 	"testing"
 )
 
+func init() {
+	fr = Stats{FileName: "test.json", Total: 5, Passed: 2, Failed: 2, Ignored: 1, Status: "FAILED"}
+}
+
 func Test_GenerateReports(t *testing.T) {
-	fileName := "test.file"
-	ignored := 0
-	var passed, failed int32 = 10, 5
-	generateReport(fileName, ignored, passed, failed)
-	_, err := os.Stat("test.png")
+	fr.Store("test.json")
+	GenerateReport()
+	_, err := os.Stat("./results/")
 	if err != nil {
 		t.Fatal(err)
 	}
-	os.Remove("test.png")
+	os.RemoveAll("./results/")
 }
 
-func Test_FinalResult(t *testing.T) {
+func Test_PrintResults(t *testing.T) {
 	fileName := "test.file"
 	ignored := 0
 	result := map[string]bool{
@@ -25,10 +27,5 @@ func Test_FinalResult(t *testing.T) {
 		"test 2": false,
 	}
 
-	FinalResult(fileName, ignored, result)
-	_, err := os.Stat("test.png")
-	if err != nil {
-		t.Fatal(err)
-	}
-	os.Remove("test.png")
+	PrintResults(fileName, ignored, result)
 }

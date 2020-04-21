@@ -2,63 +2,153 @@ package utils
 
 import (
 	"fmt"
+	"html/template"
 	"os"
-	"strings"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"github.com/wcharczuk/go-chart"
+	"github.com/wcharczuk/go-chart/drawing"
 )
 
-// FinalResult evaluates and prints final results based on the given data.
-func FinalResult(fileName string, ignored int, result map[string]bool) {
+// Stats is a type of struct and has map in it. where it stores all the
+// test results by file name. Key holds file name and value holds results
+type Stats struct {
+	FileName string
+	Total    int
+	Passed   int32
+	Failed   int32
+	Ignored  int
+	Status   string
+}
+
+// Store adds results to the FinalResults type
+func (s *Stats) Store(key string) {
+	d[key] = *s
+}
+
+// ReadAll return all results
+func (s *Stats) ReadAll() map[string]Stats {
+	return d
+}
+
+var (
+	d              = make(map[string]Stats, 0)
+	fr             Stats
+	passed, failed int32
+	ignored        int
+)
+
+// PrintResults evaluates and prints final results based on the given data.
+func PrintResults(fileName string, ignore int, result map[string]bool) {
 
 	var (
-		total          int
-		passed, failed int32
+		total      int
+		pass, fail int32
 	)
 
-	total = len(result) + ignored
+	if ignore > 0 {
+		ignored += ignore
+	}
+
+	total = len(result) + ignore
 
 	for _, v := range result {
 		if v {
 			passed++
+			pass++
 		} else {
 			failed++
+			fail++
 		}
 	}
 	fmt.Println("##############################################")
-	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, passed, failed, ignored)
+	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, pass, fail, ignore)
 	fmt.Println("##############################################")
 
-	generateReport(fileName, ignored, passed, failed)
+	fr.FileName = fileName
+	fr.Total = total
+	fr.Failed = fail
+	fr.Ignored = ignore
+	fr.Passed = pass
 
-	if failed > 0 {
-		fmt.Printf("Result: %v\n", "FAILED")
+	if fail > 0 {
+		fr.Status = "FAILED"
 	}
+
+	fr.Store(fileName)
+
 }
 
-// generateReport will create a final report as pie chart and save them to a file
-func generateReport(fileName string, ignored int, passed, failed int32) {
-	pie := chart.PieChart{
-		Title:  "Test Result",
-		Width:  512,
-		Height: 512,
-		Values: []chart.Value{
-			{Style: chart.Style{Show: true}, Value: float64(passed), Label: "Passed"},
-			{Style: chart.Style{Show: true}, Value: float64(failed), Label: "Failed"},
-			{Style: chart.Style{Show: true}, Value: float64(ignored), Label: "Ignored"},
-		},
+type data struct {
+	PageTitle string
+	Tests     []Stats
+}
+
+// GenerateReport will create a final report as pie chart and save them to a file
+func GenerateReport() {
+
+	var (
+		status string
+		d      data
+	)
+	path := "./results/"
+
+	if _, err := os.Stat("./results/"); err != nil {
+		logrus.Error(err)
+		if err = os.Mkdir("results", os.ModePerm); err != nil {
+			logrus.Fatal(err)
+		}
 	}
 
-	fileStrings := strings.Split(fileName, ".")
-	resultFile := fmt.Sprintf("%v.png", fileStrings[0])
+	defer func() {
+		pie := chart.PieChart{
+			Title:  "Test Result",
+			Width:  250,
+			Height: 250,
+			Values: []chart.Value{
+				{Style: chart.Style{Show: true, FillColor: drawing.ColorGreen}, Value: float64(passed), Label: fmt.Sprintf("Passed:%v", passed)},
+				{Style: chart.Style{Show: true, FillColor: drawing.ColorRed}, Value: float64(failed), Label: fmt.Sprintf("Failed:%v", failed)},
+				{Style: chart.Style{Show: true}, Value: float64(ignored), Label: fmt.Sprintf("Ignored:%v", ignored)},
+			},
+		}
 
-	f, err := os.Create(resultFile)
+		resultFile := fmt.Sprintf(path + "results_pie_chart.png")
+
+		f, err := os.Create(resultFile)
+		if err != nil {
+			logrus.Error(err)
+		}
+		defer f.Close()
+		if err = pie.Render(chart.PNG, f); err != nil {
+			logrus.Error(err)
+		}
+		failed, passed, ignored = 0, 0, 0
+	}()
+
+	tmpl := template.New("layout")
+
+	tmpl.Parse(layout)
+
+	mapData := fr.ReadAll()
+
+	d.PageTitle = "Test Results_" + time.Now().Format("2006-01-02 15:04:05")
+	for _, v := range mapData {
+		d.Tests = append(d.Tests, v)
+	}
+	file := path + "Test Results.html"
+	f, err := os.Create(file)
 	if err != nil {
 		logrus.Error(err)
 	}
 	defer f.Close()
-	if err = pie.Render(chart.PNG, f); err != nil {
-		logrus.Error(err)
+
+	tmpl.Execute(f, d)
+
+	if failed > 0 {
+		status = "FAILED"
+	} else {
+		status = "SUCCESSFUL"
 	}
+	fmt.Printf("Result: %v\n", status)
 }
