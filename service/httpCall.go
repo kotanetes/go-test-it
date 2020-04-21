@@ -72,7 +72,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 		if !scenario.Ignore {
 			testScenarios[scenario.Scenario] = scenario
 		} else {
-			logrus.Info(fmt.Sprintf("Test %v Ignored", scenario.Scenario))
+			logrus.WithField("Scenario", scenario.Scenario).Info("Ignored")
 			ignored++
 		}
 	}
@@ -124,7 +124,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 			logrus.WithField("scenario", test.Scenario).Info("failed, retunred response is not as expected")
 			finalResult[test.Scenario] = false
 		default:
-			logrus.WithField("scenario", test.Scenario).Info("Passed", test.Scenario)
+			logrus.WithField("scenario", test.Scenario).Info("Passed")
 			finalResult[test.Scenario] = true
 		}
 	}
