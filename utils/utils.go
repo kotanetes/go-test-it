@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/kotanetes/go-test-it/model"
 	"github.com/sirupsen/logrus"
 	"github.com/wcharczuk/go-chart"
 	"github.com/wcharczuk/go-chart/drawing"
@@ -40,20 +41,20 @@ var (
 )
 
 // PrintResults evaluates and prints final results based on the given data.
-func PrintResults(fileName string, ignore int, result map[string]bool) {
+func PrintResults(fileName string, result model.HTTPResult) {
 
 	var (
 		total      int
 		pass, fail int32
 	)
 
-	if ignore > 0 {
-		ignored += ignore
+	if result.Ignored > 0 {
+		ignored += result.Ignored
 	}
 
-	total = len(result) + ignore
+	total = len(result.TestResults) + result.Ignored
 
-	for _, v := range result {
+	for _, v := range result.TestResults {
 		if v {
 			passed++
 			pass++
@@ -63,13 +64,13 @@ func PrintResults(fileName string, ignore int, result map[string]bool) {
 		}
 	}
 	fmt.Println("##############################################")
-	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, pass, fail, ignore)
+	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, pass, fail, result.Ignored)
 	fmt.Println("##############################################")
 
 	fr.FileName = fileName
 	fr.Total = total
 	fr.Failed = fail
-	fr.Ignored = ignore
+	fr.Ignored = result.Ignored
 	fr.Passed = pass
 
 	if fail > 0 {

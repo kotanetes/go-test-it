@@ -65,11 +65,11 @@ func main() {
 				if err != nil {
 					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
-				result, ignored, err := handleTests(data)
+				result, err := handleTests(data)
 				if err != nil {
 					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
-				utils.PrintResults(file.Name(), ignored, result)
+				utils.PrintResults(file.Name(), result)
 
 			}(file.Name(), *filePath)
 		}
@@ -85,23 +85,23 @@ func handleSpecificFile(path, fileName string) {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	result, ignored, err := handleTests(data)
+	result, err := handleTests(data)
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	utils.PrintResults(fileName, ignored, result)
+	utils.PrintResults(fileName, result)
 }
 
 // handleTests unmarshals byte data to TestModel type and pass the scenarios
 // to MakeHTTPCall function that makes calls to URL mentioned in tests.
-func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
+func handleTests(data []byte) (result model.HTTPResult, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
 	if err != nil {
-		return nil, 0, err
+		return result, err
 	}
-	result, ignored, err = service.MakeHTTPCall(scenarios.Test)
-	return result, ignored, err
+	result, err = service.MakeHTTPCall(scenarios.Test)
+	return result, err
 }
 
 // printFileName prints the file name just before the execution starts

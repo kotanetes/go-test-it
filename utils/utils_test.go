@@ -3,6 +3,8 @@ package utils
 import (
 	"os"
 	"testing"
+
+	"github.com/kotanetes/go-test-it/model"
 )
 
 func init() {
@@ -27,5 +29,7 @@ func Test_PrintResults(t *testing.T) {
 		"test 2": false,
 	}
 
-	PrintResults(fileName, ignored, result)
+	hr := model.HTTPResult{TestResults: result, Ignored: ignored}
+
+	PrintResults(fileName, hr)
 }

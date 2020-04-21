@@ -223,9 +223,9 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		_, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		res, _ := MakeHTTPCall(scenario)
+		if res.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, res.Ignored)
 		}
 
 	})
@@ -258,13 +258,13 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		result, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		result, _ := MakeHTTPCall(scenario)
+		if result.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, result.Ignored)
 		}
 
-		if result[scenario[0].Scenario] != scenarioResult {
-			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result[scenario[0].Scenario])
+		if result.TestResults[scenario[0].Scenario] != scenarioResult {
+			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result.TestResults[scenario[0].Scenario])
 		}
 
 	})
@@ -300,13 +300,13 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		result, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		result, _ := MakeHTTPCall(scenario)
+		if result.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, result.Ignored)
 		}
 
-		if result[scenario[0].Scenario] != scenarioResult {
-			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result[scenario[0].Scenario])
+		if result.TestResults[scenario[0].Scenario] != scenarioResult {
+			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result.TestResults[scenario[0].Scenario])
 		}
 
 	})
@@ -338,7 +338,7 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		_, _, err := MakeHTTPCall(scenario)
+		_, err := MakeHTTPCall(scenario)
 		if err != nil && !errorExpected {
 			t.Errorf("%v failed,scenario returned error %v", t.Name(), err)
 		}
@@ -372,13 +372,13 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		result, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		result, _ := MakeHTTPCall(scenario)
+		if result.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, result.Ignored)
 		}
 
-		if result[scenario[0].Scenario] != scenarioResult {
-			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result[scenario[0].Scenario])
+		if result.TestResults[scenario[0].Scenario] != scenarioResult {
+			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result.TestResults[scenario[0].Scenario])
 		}
 
 	})
@@ -413,13 +413,13 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		result, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		result, _ := MakeHTTPCall(scenario)
+		if result.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, result.Ignored)
 		}
 
-		if result[scenario[0].Scenario] != scenarioResult {
-			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result[scenario[0].Scenario])
+		if result.TestResults[scenario[0].Scenario] != scenarioResult {
+			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result.TestResults[scenario[0].Scenario])
 		}
 
 	})
@@ -453,13 +453,13 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		result, ignored, _ := MakeHTTPCall(scenario)
-		if ignored != ignoredCount {
-			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, ignored)
+		result, _ := MakeHTTPCall(scenario)
+		if result.Ignored != ignoredCount {
+			t.Errorf("%v failed,scenario is ignored. expected %v, got %v", t.Name(), ignoredCount, result.Ignored)
 		}
 
-		if result[scenario[0].Scenario] != scenarioResult {
-			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result[scenario[0].Scenario])
+		if result.TestResults[scenario[0].Scenario] != scenarioResult {
+			t.Errorf("%v failed,scenario result expected %v, got %v", t.Name(), scenarioResult, result.TestResults[scenario[0].Scenario])
 		}
 
 	})
@@ -492,7 +492,7 @@ func Test_MakeHTTPCall(t *testing.T) {
 
 		InitHTTPClient(mock)
 
-		_, _, err := MakeHTTPCall(scenario)
+		_, err := MakeHTTPCall(scenario)
 		if err != nil && !errorExpected {
 			t.Errorf("%v failed,scenario returned error %v", t.Name(), err)
 		}
