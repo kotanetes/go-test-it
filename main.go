@@ -63,7 +63,7 @@ func main() {
 				defer wg.Done()
 				data, err := ioutil.ReadFile(path + fileName)
 				if err != nil {
-					logrus.Fatal(err)
+					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
 				result, ignored, err := handleTests(data)
 				if err != nil {
