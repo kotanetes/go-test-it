@@ -31,5 +31,8 @@ Installation instructions are listed below.
     * Add indicator `"ignore":true` to the test scenario and tool will skip the test scenario
     
  ## Results
-  * Tool generates results as a Pie Chart and also prints the results to console
+  * Tool generates results as a HTMl Report,Pie Chart and also prints the results to console
+    example:
+    
+    Screen Shot 2020-04-21 at 12.05.38 AM
   
