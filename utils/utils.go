@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"os"
@@ -152,4 +153,68 @@ func GenerateReport() {
 		status = "SUCCESSFUL"
 	}
 	fmt.Printf("Result: %v\n", status)
+}
+
+// InitJSONFile - creates a sample json file to avoid overhead to user
+func InitJSONFile() {
+	var m = make(map[string]interface{}, 0)
+
+	tests := []model.TestScenario{
+		{
+			Scenario: "First REST service Test 1",
+			Ignore:   false,
+			Type:     "REST",
+			URL:      "http://sample-url.domain.com/users",
+			Method:   "POST",
+			Header: model.Header{
+				Authorization: "Basic e1f4g5dew==",
+				ContentType:   "application/json",
+			},
+			Body: map[string]interface{}{
+				"id":   123456,
+				"name": "sample",
+			},
+			ExpectedStatusCode: 200,
+			ExpectedResult: map[string]interface{}{
+				"message": "user crested",
+			},
+		},
+		{
+			Scenario: "First REST service Test 2",
+			Ignore:   false,
+			Type:     "REST",
+			URL:      "http://sample-url.domain.com/users?id=123456",
+			Method:   "GET",
+			Header: model.Header{
+				Authorization: "Basic e1f4g5dew==",
+				ContentType:   "application/json",
+			},
+			ExpectedStatusCode: 200,
+			ExpectedResult: map[string]interface{}{
+				"data": []interface{}{
+					map[string]interface{}{
+						"id":   123456,
+						"name": "sample",
+					},
+				},
+			},
+		},
+	}
+
+	m["tests"] = tests
+
+	data, err := json.MarshalIndent(m, "", "    ")
+	if err != nil {
+		logrus.Fatal(err)
+	}
+
+	f, err := os.Create("go_test_it_reg.json")
+	defer f.Close()
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	_, err = f.Write(data)
+	if err != nil {
+		logrus.Fatal(err)
+	}
 }

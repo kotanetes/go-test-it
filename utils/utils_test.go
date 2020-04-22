@@ -33,3 +33,13 @@ func Test_PrintResults(t *testing.T) {
 
 	PrintResults(fileName, hr)
 }
+
+func Test_InitJSONFile(t *testing.T) {
+	InitJSONFile()
+	fileName := "go_test_it_reg.json"
+	_, err := os.Stat(fileName)
+	if err != nil {
+		t.Fatal(err)
+	}
+	os.Remove(fileName)
+}

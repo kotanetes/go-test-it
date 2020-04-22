@@ -42,6 +42,15 @@ func main() {
 	fileName = flag.String("file-name", "", "Name Of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
 
+	args := os.Args[1:]
+
+	if len(args) > 0 {
+		if args[0] == "init" {
+			utils.InitJSONFile()
+			return
+		}
+	}
+
 	flag.Parse()
 
 	if strings.Contains(*filePath, ".json") {
