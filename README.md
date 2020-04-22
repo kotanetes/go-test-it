@@ -16,7 +16,7 @@ Installation instructions are listed below.
    ```
 ## Usage
   * Create a JSON file similar to example file in /test/example.json in any directory
-  * Hate creating JSON files, Tool will create sample file nad couple of test Sceanrios
+  * Can't creating JSON files? Tool will create sample file and couple of test sceanrios
       ```bash
       go-test-it init #generates json file with test scenarios
       ```
