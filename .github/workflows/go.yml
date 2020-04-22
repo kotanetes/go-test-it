@@ -31,4 +31,12 @@ jobs:
         fi
 
     - name: Test
-      run: go test -v ./...
+      run: go test -v -coverprofile=c.out ./...
+    - name: Coverage
+      run: go tool cover -func=c.out
+    - name: gcov2lcov-action
+      uses: jandelgado/gcov2lcov-action@v1.0.0
+      with:
+          infile: c.out
+          outfile: coverage.lcov
+
