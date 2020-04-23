@@ -105,7 +105,6 @@ func GenerateReport() {
 
 	defer func() {
 		pie := chart.PieChart{
-			Title:  "Test Result",
 			Width:  250,
 			Height: 250,
 			Values: []chart.Value{
