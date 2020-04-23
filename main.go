@@ -42,9 +42,19 @@ func main() {
 	fileName = flag.String("file-name", "", "Name Of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
 
+	args := os.Args[1:]
+
+	if len(args) > 0 {
+		if args[0] == "init" {
+			utils.InitJSONFile()
+			return
+		}
+	}
+
 	flag.Parse()
 
 	if strings.Contains(*filePath, ".json") {
+		printFileName(*fileName)
 		handleSpecificFile(*filePath, *fileName)
 		return
 	}
@@ -63,18 +73,19 @@ func main() {
 				defer wg.Done()
 				data, err := ioutil.ReadFile(path + fileName)
 				if err != nil {
-					logrus.Fatal(err)
+					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
-				result, ignored, err := handleTests(data)
+				result, err := handleTests(data)
 				if err != nil {
 					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
-				utils.FinalResult(file.Name(), ignored, result)
+				utils.PrintResults(file.Name(), result)
 
 			}(file.Name(), *filePath)
 		}
 		wg.Wait()
 	}
+	utils.GenerateReport()
 }
 
 // handleSpecificFile reads specific json file from the given path
@@ -84,23 +95,23 @@ func handleSpecificFile(path, fileName string) {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	result, ignored, err := handleTests(data)
+	result, err := handleTests(data)
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	utils.FinalResult(fileName, ignored, result)
+	utils.PrintResults(fileName, result)
 }
 
 // handleTests unmarshals byte data to TestModel type and pass the scenarios
 // to MakeHTTPCall function that makes calls to URL mentioned in tests.
-func handleTests(data []byte) (result map[string]bool, ignored int, err error) {
+func handleTests(data []byte) (result model.HTTPResult, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
 	if err != nil {
-		return nil, 0, err
+		return result, err
 	}
-	result, ignored, err = service.MakeHTTPCall(scenarios.Test)
-	return result, ignored, err
+	result, err = service.MakeHTTPCall(scenarios.Test)
+	return result, err
 }
 
 // printFileName prints the file name just before the execution starts

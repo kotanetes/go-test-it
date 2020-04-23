@@ -16,7 +16,10 @@ Installation instructions are listed below.
    ```
 ## Usage
   * Create a JSON file similar to example file in /test/example.json in any directory
-  
+  * Can't creating JSON files? Tool will create sample file and couple of test sceanrios
+      ```bash
+      go-test-it init #generates json file with test scenarios
+      ```
   * Need help?
   ```bash
   go-test-it -help
@@ -34,5 +37,7 @@ Installation instructions are listed below.
     * Add indicator `"ignore":true` to the test scenario and tool will skip the test scenario
     
  ## Results
-  * Tool generates results as a Pie Chart and also prints the results to console
+  * Tool generates results as a HTMl Report,Pie Chart and also prints the results to console
+    
+    ![Screenshot](Screen_Shot.png)
   

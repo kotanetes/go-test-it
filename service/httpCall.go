@@ -56,13 +56,14 @@ func doCall(req *http.Request) ([]byte, int) {
 // 3. Create new http Request and make a call to service.
 // 4. Read the http.Response and compare the results with the assertions in scenarios.
 // 5. Generate the Test results and return thwm along with ignored scenarios count.
-func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) {
+func MakeHTTPCall(scenarios []model.TestScenario) (model.HTTPResult, error) {
 	var (
 		reqBody     []byte
 		err         error
 		requestBody io.Reader
 		body        interface{}
 		ignored     int
+		testResult  model.HTTPResult
 	)
 
 	finalResult := make(map[string]bool)
@@ -72,7 +73,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 		if !scenario.Ignore {
 			testScenarios[scenario.Scenario] = scenario
 		} else {
-			logrus.WithField("scenario", scenario.Scenario).Info("Test Ignored")
+			logrus.WithField("Scenario", scenario.Scenario).Info("Ignored")
 			ignored++
 		}
 	}
@@ -91,7 +92,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 			reqBody, err = json.Marshal(body)
 			if err != nil {
 				logrus.Error(err)
-				return nil, 0, err
+				return testResult, err
 			}
 
 			requestBody = strings.NewReader(string(reqBody))
@@ -100,7 +101,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 		req, err := http.NewRequest(test.Method, test.URL, requestBody)
 		if err != nil {
 			logrus.Error(err)
-			return nil, 0, err
+			return testResult, err
 		}
 
 		if test.Header.Authorization != "" {
@@ -113,7 +114,7 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 		err = json.Unmarshal(bodyBytes, &result)
 		if err != nil {
 			logrus.Error(err)
-			return nil, 0, err
+			return testResult, err
 		}
 
 		switch {
@@ -124,12 +125,14 @@ func MakeHTTPCall(scenarios []model.TestScenario) (map[string]bool, int, error) 
 			logrus.WithField("scenario", test.Scenario).Info("failed, retunred response is not as expected")
 			finalResult[test.Scenario] = false
 		default:
-			logrus.WithField("scenario", test.Scenario).Info("Passed", test.Scenario)
+			logrus.WithField("scenario", test.Scenario).Info("Passed")
 			finalResult[test.Scenario] = true
 		}
 	}
+	testResult.TestResults = finalResult
+	testResult.Ignored = ignored
 
-	return finalResult, ignored, nil
+	return testResult, nil
 }
 
 func compareData(scenario string, result, expectedResult interface{}) bool {

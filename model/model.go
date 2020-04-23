@@ -26,3 +26,9 @@ type Header struct {
 	Authorization string `json:"authorization"`
 	ContentType   string `json:"content-type"`
 }
+
+type HTTPResult struct {
+	TestResults  map[string]bool
+	Ignored      int
+	ResponseTime int
+}
