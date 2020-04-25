@@ -7,6 +7,7 @@ import (
 	"os"
 	"sort"
 	"time"
+	"sort"
 
 	"github.com/kotanetes/go-test-it/model"
 	"github.com/sirupsen/logrus"
@@ -106,13 +107,12 @@ func GenerateReport() {
 
 	defer func() {
 		pie := chart.PieChart{
-			Title:  "Test Result",
 			Width:  250,
 			Height: 250,
 			Values: []chart.Value{
-				{Style: chart.Style{Show: true, FillColor: drawing.ColorGreen}, Value: float64(passed), Label: fmt.Sprintf("Passed:%v", passed)},
-				{Style: chart.Style{Show: true, FillColor: drawing.ColorRed}, Value: float64(failed), Label: fmt.Sprintf("Failed:%v", failed)},
-				{Style: chart.Style{Show: true}, Value: float64(ignored), Label: fmt.Sprintf("Ignored:%v", ignored)},
+				{Style: chart.Style{FillColor: drawing.ColorGreen}, Value: float64(passed), Label: fmt.Sprintf("Passed:%v", passed)},
+				{Style: chart.Style{FillColor: drawing.ColorRed}, Value: float64(failed), Label: fmt.Sprintf("Failed:%v", failed)},
+				{Value: float64(ignored), Label: fmt.Sprintf("Ignored:%v", ignored)},
 			},
 		}
 
