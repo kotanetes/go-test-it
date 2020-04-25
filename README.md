@@ -1,5 +1,6 @@
 
 ![Go](https://github.com/kotanetes/go-test-it/workflows/Go/badge.svg?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kotanetes/go-test-it)](https://goreportcard.com/report/github.com/kotanetes/go-test-it)
 
 # go-test-it
 Automated regression testing package written in Go.This tool supports both REST API and GraphQL API. All you need to do is write json files with all the possible scenarios. examples are available in /tests directory.
