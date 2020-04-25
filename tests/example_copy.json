@@ -48,10 +48,7 @@
             "userId": 1,
             "id": 11,
             "title": "vero rerum temporibus dolor",
-            "completed": true,
-            "addtional":{
-              "hey" :"hello"
-            }
+            "completed": true
           }
         },
         {
