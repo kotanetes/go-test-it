@@ -140,7 +140,7 @@ func GenerateReport() {
 	for k := range mapData {
 		files = append(files, k)
 	}
-
+	//sort test cases by name
 	sort.Strings(files)
 
 	for _, v := range files {
