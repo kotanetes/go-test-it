@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
 	"time"
+	"sort"
 
 	"github.com/kotanetes/go-test-it/model"
 	"github.com/sirupsen/logrus"
