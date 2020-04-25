@@ -53,8 +53,8 @@ func main() {
 
 	flag.Parse()
 
-	if strings.Contains(*filePath, ".json") {
-		printFileName(*filePath)
+	if strings.EqualFold(*filePath, "./") && *fileName != "" {
+		printFileName(*fileName)
 		handleSpecificFile(*filePath, *fileName)
 		return
 	}
