@@ -1,0 +1,1104 @@
+{
+    "tests": [
+        {
+            "scenario": "Graphql Scenario 1",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Ciara\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Ciara",
+                        "lastName": "Friesen",
+                        "qualification": "Executive"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 2",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"General\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "General",
+                        "lastName": "Tremblay",
+                        "qualification": "Designer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 3",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Furman\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Furman",
+                        "lastName": "Carroll",
+                        "qualification": "Producer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 4",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Maybell\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Maybell",
+                        "lastName": "Stoltenberg",
+                        "qualification": "Coordinator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 5",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Jackie\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Jackie",
+                        "lastName": "Williamson",
+                        "qualification": "Planner"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 6",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Shaniya\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Shaniya",
+                        "lastName": "Kozey",
+                        "qualification": "Administrator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 7",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Paxton\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Paxton",
+                        "lastName": "Cole",
+                        "qualification": "Agent"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 8",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Annamarie\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Annamarie",
+                        "lastName": "Champlin",
+                        "qualification": "Planner"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 9",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Domenica\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Domenica",
+                        "lastName": "Doyle",
+                        "qualification": "Officer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 10",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Jaqueline\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Jaqueline",
+                        "lastName": "Little",
+                        "qualification": "Agent"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 11",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Morgan\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Morgan",
+                        "lastName": "Rohan",
+                        "qualification": "Director"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 12",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Ludwig\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Ludwig",
+                        "lastName": "Ankunding",
+                        "qualification": "Consultant"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 13",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Brittany\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Brittany",
+                        "lastName": "Stanton",
+                        "qualification": "Supervisor"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 14",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Violette\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Violette",
+                        "lastName": "Zieme",
+                        "qualification": "Orchestrator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 15",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Kamron\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Kamron",
+                        "lastName": "Treutel",
+                        "qualification": "Facilitator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 16",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Shana\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Shana",
+                        "lastName": "Graham",
+                        "qualification": "Manager"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 17",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Blair\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Blair",
+                        "lastName": "Frami",
+                        "qualification": "Technician"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 18",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Kaley\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Kaley",
+                        "lastName": "Schmeler",
+                        "qualification": "Agent"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 19",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Carli\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Carli",
+                        "lastName": "Reichel",
+                        "qualification": "Director"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 20",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Sandra\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Sandra",
+                        "lastName": "Cassin",
+                        "qualification": "Supervisor"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 21",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Winifred\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Winifred",
+                        "lastName": "Boyer",
+                        "qualification": "Architect"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 22",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Vada\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Vada",
+                        "lastName": "Kuhic",
+                        "qualification": "Facilitator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 23",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Newton\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Newton",
+                        "lastName": "Wilkinson",
+                        "qualification": "Orchestrator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 24",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Akeem\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Akeem",
+                        "lastName": "Schamberger",
+                        "qualification": "Coordinator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 25",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Roslyn\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Roslyn",
+                        "lastName": "Runte",
+                        "qualification": "Supervisor"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 26",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Linwood\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Linwood",
+                        "lastName": "OReilly",
+                        "qualification": "Analyst"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 27",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Phyllis\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Phyllis",
+                        "lastName": "Ondricka",
+                        "qualification": "Architect"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 28",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Brayan\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Brayan",
+                        "lastName": "Langosh",
+                        "qualification": "Representative"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 29",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Modesta\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Modesta",
+                        "lastName": "Carter",
+                        "qualification": "Technician"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 30",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Lavern\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Lavern",
+                        "lastName": "Cronin",
+                        "qualification": "Administrator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 31",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Lucile\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Lucile",
+                        "lastName": "Reichert",
+                        "qualification": "Liaison"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 32",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Barney\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Barney",
+                        "lastName": "Parisian",
+                        "qualification": "Architect"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 33",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Trevion\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Trevion",
+                        "lastName": "Wiza",
+                        "qualification": "Manager"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 34",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Ben\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Ben",
+                        "lastName": "Armstrong",
+                        "qualification": "Liaison"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 35",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Gussie\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Gussie",
+                        "lastName": "Ebert",
+                        "qualification": "Director"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 36",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Gabrielle\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Gabrielle",
+                        "lastName": "Ondricka",
+                        "qualification": "Architect"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 37",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Ellen\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Ellen",
+                        "lastName": "Christiansen",
+                        "qualification": "Facilitator"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 38",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Keegan\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Keegan",
+                        "lastName": "Kutch",
+                        "qualification": "Supervisor"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 39",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Jasen\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Jasen",
+                        "lastName": "Kirlin",
+                        "qualification": "Analyst"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 40",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Leonard\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Leonard",
+                        "lastName": "Zieme",
+                        "qualification": "Designer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 41",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Grayce\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Grayce",
+                        "lastName": "Predovic",
+                        "qualification": "Specialist"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 42",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Ally\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Ally",
+                        "lastName": "Abbott",
+                        "qualification": "Executive"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 43",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Vidal\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Vidal",
+                        "lastName": "Purdy",
+                        "qualification": "Representative"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 44",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Gunnar\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Gunnar",
+                        "lastName": "Ryan",
+                        "qualification": "Designer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 45",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Stephon\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Stephon",
+                        "lastName": "Gerlach",
+                        "qualification": "Analyst"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 46",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Cordell\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Cordell",
+                        "lastName": "Sipes",
+                        "qualification": "Strategist"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 47",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Andrew\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Andrew",
+                        "lastName": "Jacobs",
+                        "qualification": "Specialist"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 48",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Lia\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Lia",
+                        "lastName": "Prohaska",
+                        "qualification": "Engineer"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 49",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Eugenia\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Eugenia",
+                        "lastName": "Boyer",
+                        "qualification": "Executive"
+                    }
+                }
+            }
+        },
+        {
+            "scenario": "Graphql Scenario 50",
+            "ignore": false,
+            "type": "graphQL",
+            "url": "http://localhost:9090/query",
+            "method": "POST",
+            "header": {
+                "authorization": "",
+                "content-type": ""
+            },
+            "body": "query{teacher(firstName:\"Hudson\"){firstName lastName qualification}}",
+            "expectedStatusCode": 200,
+            "expectedResult": {
+                "data": {
+                    "teacher": {
+                        "firstName": "Hudson",
+                        "lastName": "Graham",
+                        "qualification": "Representative"
+                    }
+                }
+            }
+        }
+    ]
+}

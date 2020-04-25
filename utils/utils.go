@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"sort"
 	"time"
 
 	"github.com/kotanetes/go-test-it/model"
@@ -133,11 +134,19 @@ func GenerateReport() {
 	tmpl.Parse(layout)
 
 	mapData := fr.ReadAll()
-
+	var files []string
 	d.PageTitle = "Test Results_" + time.Now().Format("2006-01-02 15:04:05")
-	for _, v := range mapData {
-		d.Tests = append(d.Tests, v)
+
+	for k := range mapData {
+		files = append(files, k)
 	}
+
+	sort.Strings(files)
+
+	for _, v := range files {
+		d.Tests = append(d.Tests, mapData[v])
+	}
+
 	file := path + "Test Results.html"
 	f, err := os.Create(file)
 	if err != nil {
