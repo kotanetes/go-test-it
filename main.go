@@ -54,7 +54,7 @@ func main() {
 	flag.Parse()
 
 	if strings.Contains(*filePath, ".json") {
-		printFileName(*fileName)
+		printFileName(*filePath)
 		handleSpecificFile(*filePath, *fileName)
 		return
 	}
@@ -100,6 +100,7 @@ func handleSpecificFile(path, fileName string) {
 		logrus.Fatal(err)
 	}
 	utils.PrintResults(fileName, result)
+	utils.GenerateReport()
 }
 
 // handleTests unmarshals byte data to TestModel type and pass the scenarios

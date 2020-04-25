@@ -74,6 +74,7 @@ func PrintResults(fileName string, result model.HTTPResult) {
 	fr.Failed = fail
 	fr.Ignored = result.Ignored
 	fr.Passed = pass
+	fr.Status = "PASSED"
 
 	if fail > 0 {
 		fr.Status = "FAILED"
