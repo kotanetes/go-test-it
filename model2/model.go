@@ -12,10 +12,13 @@ import (
 )
 
 const (
-	// GraphQL - constant used to check test type
+	// GraphQL - constant used to check scenario type
 	GraphQL = "graphql"
-	Failed  = "FAILED"
-	Passed  = "PASSED"
+	// Failed - constant used to set status
+	Failed = "FAILED"
+	// Passed - constant used to set status
+	Passed = "PASSED"
+	// Ignored - constant used to set status
 	Ignored = "IGNORED"
 )
 
@@ -44,6 +47,12 @@ type TestModel struct {
 	Tests  TestScenarios `json:"tests"`
 	status string
 	HTTPResult
+}
+
+// NewTestModel creates new pointer object
+// of TestModel struct
+func NewTestModel() TestModel {
+	return TestModel{}
 }
 
 // TestScenarios - slice of test scenarios
@@ -84,7 +93,7 @@ type TestScenario struct {
 	// also to compare the each and every field against the retunred http response.
 	ExpectedResult     interface{} `json:"expectedResult"`
 	ReturnedStatusCode int
-	ReturnedResult     map[string]interface{}
+	ReturnedResult     interface{}
 }
 
 // HTTPRequest generates the http.Request based on the scenario
@@ -96,7 +105,7 @@ func (s *TestScenario) HTTPRequest(m TestModel) (*http.Request, error) {
 		requestBody io.Reader
 		body        interface{}
 	)
-
+	logrus.WithField("scenario", s.Scenario).Info("Creating HTTP Request")
 	if s.Body != nil {
 		switch strings.ToLower(s.Type) {
 		case GraphQL:
@@ -131,6 +140,7 @@ func (s *TestScenario) SetHeader(t TestModel, req *http.Request) {
 			req.Header.Set(k, v)
 		}
 	}
+	logrus.WithField("scenario", s.Scenario).Info("Request Headers are Set")
 }
 
 func formURL(m TestModel, s TestScenario) (url string) {
@@ -216,12 +226,14 @@ type Error struct {
 func (t *TestModel) SetFileName(name string) {
 	logrus.Debugf("Excueting SetFileName")
 	t.FileName = name
+	logrus.Info(fmt.Sprintf("FileName %v Set", t.FileName))
 }
 
 // IsFileIgnored verifies and return bool value
 // if the file has been ignored or not
 func (t *TestModel) IsFileIgnored() bool {
 	logrus.Debugf("Excueting IsFileIgnored")
+	logrus.Info(fmt.Sprintf("FileName %v Ignored", t.FileName))
 	return t.IgnoreFile
 }
 
@@ -243,23 +255,26 @@ func (t *TestModel) ExcludeIgnoredScenarios() TestScenarios {
 	if len(ignoredTests) > 0 {
 		t.TestResults.Ignored = ignoredTests
 	}
-
+	logrus.Info("Excluded Ignored Scenarios")
 	return toBeTested
 }
 
 // CompareData compare results expected vs got
 func (s *TestScenario) CompareData() (bool, []Error) {
+	logrus.WithField("scenario", s.Scenario).Debugf("Excueting CompareData")
 	var (
 		r      DiffReporter
 		errors []Error
 	)
 
 	isValid := true
-
+	logrus.WithField("scenario", s.Scenario).Info("Comparing Data")
 	if !cmp.Equal(s.ExpectedResult, s.ReturnedResult, cmp.Reporter(&r)) {
+		logrus.WithField("scenario", s.Scenario).Info("Failed - data mismatch")
 		isValid = false
 		errors = append(errors, Error{Path: r.getPath(), Expected: r.getExpected(), Got: r.returnGot(), RootCause: "data mismatch"})
 	} else if s.ExpectedStatusCode != s.ReturnedStatusCode {
+		logrus.WithField("scenario", s.Scenario).Info("Failed - StatusCode mismatch")
 		isValid = false
 		errors = append(errors, Error{Expected: s.ExpectedStatusCode, Got: s.ReturnedStatusCode, RootCause: "status code mismatch"})
 	}

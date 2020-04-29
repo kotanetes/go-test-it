@@ -25,7 +25,7 @@ func init() {
 	logrus.SetOutput(os.Stdout)
 
 	// Only log the warning severity or above.
-	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetLevel(logrus.InfoLevel)
 
 	// intializing remote service
 	service.InitHTTPClient(&http.Client{})
@@ -40,8 +40,13 @@ var (
 func main() {
 
 	filePath = flag.String("file-path", "./", "Path to Test Files.")
-	fileName = flag.String("file-name", "", "Name Of Test Files.")
+	fileName = flag.String("file-name", "", "Name of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
+	debugMode = flag.Bool("d", false, "debug logs console")
+
+	if *debugMode {
+		logrus.SetLevel(logrus.DebugLevel)
+	}
 
 	args := os.Args[1:]
 

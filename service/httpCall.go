@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -30,20 +31,20 @@ func InitHTTPClient(c remoteClient) {
 // doCall does a http call to service.
 // read the body from http.Response
 // return bosy as byte array.
-func doCall(req *http.Request) ([]byte, int) {
+func doCall(req *http.Request) ([]byte, int, error) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		logrus.Error(err)
+		return nil, 0, err
 	}
 	defer resp.Body.Close()
 
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		logrus.Error(err)
+		return nil, 0, err
 	}
 
-	return bodyBytes, resp.StatusCode
+	return bodyBytes, resp.StatusCode, nil
 }
 
 // MakeHTTPCall receives the test scenarios and this function handles the scenarios
@@ -70,12 +71,19 @@ func MakeHTTPCall(t model.TestModel) (model.TestModel, error) {
 		}
 
 		test.SetHeader(t, req)
+		logrus.WithField("scenario", test.Scenario).Debugf("service call to %v", req.URL.EscapedPath())
+		bodyBytes, statusCode, err := doCall(req)
+		if err != nil {
+			logrus.WithField("scenario", test.Scenario).Error(err)
+			testErrors[test.Scenario] = []model.Error{{RootCause: fmt.Sprintf("%v", err), Trace: "error from doCall function"}}
+			break
+		}
 
-		bodyBytes, statusCode := doCall(req)
 		err = json.Unmarshal(bodyBytes, &result)
 		if err != nil {
-			logrus.Error(err)
-			return t, err
+			logrus.WithField("scenario", test.Scenario).Error(err)
+			testErrors[test.Scenario] = []model.Error{{RootCause: fmt.Sprintf("%v", err), Trace: "error while UnMarshalling"}}
+			break
 		}
 
 		test.ReturnedStatusCode = statusCode
