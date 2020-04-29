@@ -41,4 +41,7 @@ Installation instructions are listed below.
   * Tool generates results as a HTMl Report,Pie Chart and also prints the results to console
     
     ![Screenshot](Screen_Shot.png)
+    
+   * Tool also generate the JSON Results of all scenarios per file, So that User can go through errors
+     examples are available [here](./regression/file_results/)
   
