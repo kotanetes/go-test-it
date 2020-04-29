@@ -62,65 +62,65 @@
     "Errors": {
         "Graphql Scenario 16": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Stacy\"),\n- \t\t\t\"lastName\":      string(\"Quigley\"),\n+ \t\t\t\"lastName\":      string(\"Dietrich\"),\n- \t\t\t\"qualification\": string(\"Technician\"),\n+ \t\t\t\"qualification\": string(\"Producer\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Technician",
+                "Got": "Producer",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 17": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Ashly\"),\n- \t\t\t\"lastName\":      string(\"Kulas\"),\n+ \t\t\t\"lastName\":      string(\"Tremblay\"),\n- \t\t\t\"qualification\": string(\"Supervisor\"),\n+ \t\t\t\"qualification\": string(\"Strategist\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Supervisor",
+                "Got": "Strategist",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 27": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Norris\"),\n- \t\t\t\"lastName\":      string(\"Robel\"),\n+ \t\t\t\"lastName\":      string(\"Glover\"),\n- \t\t\t\"qualification\": string(\"Associate\"),\n+ \t\t\t\"qualification\": string(\"Technician\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Associate",
+                "Got": "Technician",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 31": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Aylin\"),\n- \t\t\t\"lastName\":      string(\"Walker\"),\n+ \t\t\t\"lastName\":      string(\"Klein\"),\n  \t\t\t\"qualification\": string(\"Architect\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"lastName\"].(string)",
+                "Expected": "Walker",
+                "Got": "Klein",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 40": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Jessyca\"),\n- \t\t\t\"lastName\":      string(\"Friesen\"),\n+ \t\t\t\"lastName\":      string(\"Corkery\"),\n- \t\t\t\"qualification\": string(\"Supervisor\"),\n+ \t\t\t\"qualification\": string(\"Liaison\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Supervisor",
+                "Got": "Liaison",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 46": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Damien\"),\n- \t\t\t\"lastName\":      string(\"Schiller\"),\n+ \t\t\t\"lastName\":      string(\"Greenfelder\"),\n- \t\t\t\"qualification\": string(\"Supervisor\"),\n+ \t\t\t\"qualification\": string(\"Associate\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Supervisor",
+                "Got": "Associate",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 8": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Ned\"),\n- \t\t\t\"lastName\":      string(\"Stehr\"),\n+ \t\t\t\"lastName\":      string(\"Hessel\"),\n- \t\t\t\"qualification\": string(\"Agent\"),\n+ \t\t\t\"qualification\": string(\"Manager\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Agent",
+                "Got": "Manager",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ]
     }

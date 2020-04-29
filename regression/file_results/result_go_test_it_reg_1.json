@@ -63,20 +63,20 @@
     "Errors": {
         "Graphql Scenario 2": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Olaf\"),\n- \t\t\t\"lastName\":      string(\"Hettinger\"),\n+ \t\t\t\"lastName\":      string(\"Flatley\"),\n- \t\t\t\"qualification\": string(\"Administrator\"),\n+ \t\t\t\"qualification\": string(\"Designer\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Administrator",
+                "Got": "Designer",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ],
         "Graphql Scenario 31": [
             {
-                "Field": "",
-                "Expected": null,
-                "Got": null,
-                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Barrett\"),\n- \t\t\t\"lastName\":      string(\"Ledner\"),\n+ \t\t\t\"lastName\":      string(\"Stracke\"),\n- \t\t\t\"qualification\": string(\"Developer\"),\n+ \t\t\t\"qualification\": string(\"Executive\"),\n  \t\t},\n  \t},\n  }\n",
-                "Trace": "data mismatch (-)want, (+) got"
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Developer",
+                "Got": "Executive",
+                "RootCause": "data mismatch",
+                "Trace": ""
             }
         ]
     }

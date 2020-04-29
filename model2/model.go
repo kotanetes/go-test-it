@@ -2,6 +2,7 @@ package model2
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -204,7 +205,7 @@ type HTTPResult struct {
 // rootcause and trace of errors
 // used to generate reports
 type Error struct {
-	Field     string
+	Path      string
 	Expected  interface{}
 	Got       interface{}
 	RootCause string
@@ -248,19 +249,84 @@ func (t *TestModel) ExcludeIgnoredScenarios() TestScenarios {
 
 // CompareData compare results expected vs got
 func (s *TestScenario) CompareData() (bool, []Error) {
+	var (
+		r      DiffReporter
+		errors []Error
+	)
+
 	isValid := true
-	var errors []Error
-	if diff := cmp.Diff(s.ExpectedResult, s.ReturnedResult); diff != "" {
+
+	if !cmp.Equal(s.ExpectedResult, s.ReturnedResult, cmp.Reporter(&r)) {
 		isValid = false
-		errors = append(errors, Error{RootCause: diff, Trace: "data mismatch (-)want, (+) got"})
+		errors = append(errors, Error{Path: r.getPath(), Expected: r.getExpected(), Got: r.returnGot(), RootCause: "data mismatch"})
 	} else if s.ExpectedStatusCode != s.ReturnedStatusCode {
 		isValid = false
-		errors = append(errors, Error{RootCause: cmp.Diff(s.ExpectedStatusCode, s.ReturnedStatusCode), Trace: "data mismatch (-)want, (+) got"})
+		errors = append(errors, Error{Expected: s.ExpectedStatusCode, Got: s.ReturnedStatusCode, RootCause: "status code mismatch"})
 	}
 	return isValid, errors
 }
 
-// ComputeResults - gives the final metrics
-func (t *TestModel) ComputeResults() {
+// DiffReporter is a simple custom reporter that only records differences
+// detected during comparison.
+type DiffReporter struct {
+	path     cmp.Path
+	diffs    []string
+	expected string
+	got      string
+	p        string
+}
 
+// PushStep is called when a tree-traversal operation is performed.
+// The PathStep itself is only valid until the step is popped.
+// The PathStep.Values are valid for the duration of the entire traversal
+// and must not be mutated.
+//
+// Equal always calls PushStep at the start to provide an operation-less
+// PathStep used to report the root values.
+//
+// Within a slice, the exact set of inserted, removed, or modified elements
+// is unspecified and may change in future implementations.
+// The entries of a map are iterated through in an unspecified order.
+func (r *DiffReporter) PushStep(ps cmp.PathStep) {
+	r.path = append(r.path, ps)
+}
+
+// Report is called exactly once on leaf nodes to report whether the
+// comparison identified the node as equal, unequal, or ignored.
+// A leaf node is one that is immediately preceded by and followed by
+// a pair of PushStep and PopStep calls.
+func (r *DiffReporter) Report(rs cmp.Result) {
+	if !rs.Equal() {
+		vx, vy := r.path.Last().Values()
+		r.diffs = append(r.diffs, fmt.Sprintf("%#v:\n\t-: %+v\n\t+: %+v\n", r.path, vx, vy))
+		r.expected = fmt.Sprintf("%v", vx)
+		r.got = fmt.Sprintf("%v", vy)
+		r.p = fmt.Sprintf("%#v", r.path)
+	}
+}
+
+// PopStep ascends back up the value tree.
+// There is always a matching pop call for every push call.
+func (r *DiffReporter) PopStep() {
+	r.path = r.path[:len(r.path)-1]
+}
+
+// String return diffs in string
+func (r *DiffReporter) String() string {
+	return strings.Join(r.diffs, "\n")
+}
+
+// getPath return root path in string
+func (r *DiffReporter) getPath() string {
+	return r.p
+}
+
+// getExpected retunn Expected in string
+func (r *DiffReporter) getExpected() string {
+	return r.expected
+}
+
+// returnGot retunn Got in string
+func (r *DiffReporter) returnGot() string {
+	return r.got
 }
