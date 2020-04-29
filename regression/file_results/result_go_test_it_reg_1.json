@@ -1,0 +1,83 @@
+{
+    "FileName": "go_test_it_reg_1.json",
+    "TestResults": {
+        "Ignored": {
+            "Graphql Scenario 1": "IGNORED"
+        },
+        "Passed": {
+            "Graphql Scenario 10": "PASSED",
+            "Graphql Scenario 11": "PASSED",
+            "Graphql Scenario 12": "PASSED",
+            "Graphql Scenario 13": "PASSED",
+            "Graphql Scenario 14": "PASSED",
+            "Graphql Scenario 15": "PASSED",
+            "Graphql Scenario 16": "PASSED",
+            "Graphql Scenario 17": "PASSED",
+            "Graphql Scenario 18": "PASSED",
+            "Graphql Scenario 19": "PASSED",
+            "Graphql Scenario 20": "PASSED",
+            "Graphql Scenario 21": "PASSED",
+            "Graphql Scenario 22": "PASSED",
+            "Graphql Scenario 23": "PASSED",
+            "Graphql Scenario 24": "PASSED",
+            "Graphql Scenario 25": "PASSED",
+            "Graphql Scenario 26": "PASSED",
+            "Graphql Scenario 27": "PASSED",
+            "Graphql Scenario 28": "PASSED",
+            "Graphql Scenario 29": "PASSED",
+            "Graphql Scenario 3": "PASSED",
+            "Graphql Scenario 30": "PASSED",
+            "Graphql Scenario 32": "PASSED",
+            "Graphql Scenario 33": "PASSED",
+            "Graphql Scenario 34": "PASSED",
+            "Graphql Scenario 35": "PASSED",
+            "Graphql Scenario 36": "PASSED",
+            "Graphql Scenario 37": "PASSED",
+            "Graphql Scenario 38": "PASSED",
+            "Graphql Scenario 39": "PASSED",
+            "Graphql Scenario 4": "PASSED",
+            "Graphql Scenario 40": "PASSED",
+            "Graphql Scenario 41": "PASSED",
+            "Graphql Scenario 42": "PASSED",
+            "Graphql Scenario 43": "PASSED",
+            "Graphql Scenario 44": "PASSED",
+            "Graphql Scenario 45": "PASSED",
+            "Graphql Scenario 46": "PASSED",
+            "Graphql Scenario 47": "PASSED",
+            "Graphql Scenario 48": "PASSED",
+            "Graphql Scenario 49": "PASSED",
+            "Graphql Scenario 5": "PASSED",
+            "Graphql Scenario 50": "PASSED",
+            "Graphql Scenario 6": "PASSED",
+            "Graphql Scenario 7": "PASSED",
+            "Graphql Scenario 8": "PASSED",
+            "Graphql Scenario 9": "PASSED"
+        },
+        "Failed": {
+            "Graphql Scenario 2": "FAILED",
+            "Graphql Scenario 31": "FAILED"
+        }
+    },
+    "Ignored": 0,
+    "ResponseTime": 0,
+    "Errors": {
+        "Graphql Scenario 2": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Olaf\"),\n- \t\t\t\"lastName\":      string(\"Hettinger\"),\n+ \t\t\t\"lastName\":      string(\"Flatley\"),\n- \t\t\t\"qualification\": string(\"Administrator\"),\n+ \t\t\t\"qualification\": string(\"Designer\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 31": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Barrett\"),\n- \t\t\t\"lastName\":      string(\"Ledner\"),\n+ \t\t\t\"lastName\":      string(\"Stracke\"),\n- \t\t\t\"qualification\": string(\"Developer\"),\n+ \t\t\t\"qualification\": string(\"Executive\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ]
+    }
+}

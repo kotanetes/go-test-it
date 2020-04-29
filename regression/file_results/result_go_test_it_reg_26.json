@@ -1,0 +1,145 @@
+{
+    "FileName": "go_test_it_reg_26.json",
+    "TestResults": {
+        "Ignored": null,
+        "Passed": {
+            "Graphql Scenario 1": "PASSED",
+            "Graphql Scenario 12": "PASSED",
+            "Graphql Scenario 14": "PASSED",
+            "Graphql Scenario 16": "PASSED",
+            "Graphql Scenario 18": "PASSED",
+            "Graphql Scenario 19": "PASSED",
+            "Graphql Scenario 2": "PASSED",
+            "Graphql Scenario 20": "PASSED",
+            "Graphql Scenario 21": "PASSED",
+            "Graphql Scenario 23": "PASSED",
+            "Graphql Scenario 24": "PASSED",
+            "Graphql Scenario 25": "PASSED",
+            "Graphql Scenario 27": "PASSED",
+            "Graphql Scenario 28": "PASSED",
+            "Graphql Scenario 29": "PASSED",
+            "Graphql Scenario 3": "PASSED",
+            "Graphql Scenario 30": "PASSED",
+            "Graphql Scenario 31": "PASSED",
+            "Graphql Scenario 32": "PASSED",
+            "Graphql Scenario 33": "PASSED",
+            "Graphql Scenario 34": "PASSED",
+            "Graphql Scenario 35": "PASSED",
+            "Graphql Scenario 36": "PASSED",
+            "Graphql Scenario 37": "PASSED",
+            "Graphql Scenario 38": "PASSED",
+            "Graphql Scenario 39": "PASSED",
+            "Graphql Scenario 4": "PASSED",
+            "Graphql Scenario 40": "PASSED",
+            "Graphql Scenario 41": "PASSED",
+            "Graphql Scenario 42": "PASSED",
+            "Graphql Scenario 43": "PASSED",
+            "Graphql Scenario 44": "PASSED",
+            "Graphql Scenario 46": "PASSED",
+            "Graphql Scenario 47": "PASSED",
+            "Graphql Scenario 49": "PASSED",
+            "Graphql Scenario 5": "PASSED",
+            "Graphql Scenario 50": "PASSED",
+            "Graphql Scenario 6": "PASSED",
+            "Graphql Scenario 7": "PASSED",
+            "Graphql Scenario 8": "PASSED",
+            "Graphql Scenario 9": "PASSED"
+        },
+        "Failed": {
+            "Graphql Scenario 10": "FAILED",
+            "Graphql Scenario 11": "FAILED",
+            "Graphql Scenario 13": "FAILED",
+            "Graphql Scenario 15": "FAILED",
+            "Graphql Scenario 17": "FAILED",
+            "Graphql Scenario 22": "FAILED",
+            "Graphql Scenario 26": "FAILED",
+            "Graphql Scenario 45": "FAILED",
+            "Graphql Scenario 48": "FAILED"
+        }
+    },
+    "Ignored": 0,
+    "ResponseTime": 0,
+    "Errors": {
+        "Graphql Scenario 10": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Margie\"),\n- \t\t\t\"lastName\":      string(\"Romaguera\"),\n+ \t\t\t\"lastName\":      string(\"Corwin\"),\n- \t\t\t\"qualification\": string(\"Executive\"),\n+ \t\t\t\"qualification\": string(\"Facilitator\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 11": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Kristin\"),\n- \t\t\t\"lastName\":      string(\"Lemke\"),\n+ \t\t\t\"lastName\":      string(\"Hahn\"),\n- \t\t\t\"qualification\": string(\"Specialist\"),\n+ \t\t\t\"qualification\": string(\"Architect\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 13": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Lia\"),\n- \t\t\t\"lastName\":      string(\"Orn\"),\n+ \t\t\t\"lastName\":      string(\"Prohaska\"),\n- \t\t\t\"qualification\": string(\"Planner\"),\n+ \t\t\t\"qualification\": string(\"Engineer\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 15": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Verla\"),\n- \t\t\t\"lastName\":      string(\"Schroeder\"),\n+ \t\t\t\"lastName\":      string(\"Abshire\"),\n- \t\t\t\"qualification\": string(\"Specialist\"),\n+ \t\t\t\"qualification\": string(\"Officer\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 17": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Seamus\"),\n- \t\t\t\"lastName\":      string(\"Padberg\"),\n+ \t\t\t\"lastName\":      string(\"Weimann\"),\n- \t\t\t\"qualification\": string(\"Architect\"),\n+ \t\t\t\"qualification\": string(\"Executive\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 22": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Jermain\"),\n- \t\t\t\"lastName\":      string(\"Ruecker\"),\n+ \t\t\t\"lastName\":      string(\"Hodkiewicz\"),\n  \t\t\t\"qualification\": string(\"Specialist\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 26": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Paxton\"),\n- \t\t\t\"lastName\":      string(\"Lang\"),\n+ \t\t\t\"lastName\":      string(\"Cole\"),\n- \t\t\t\"qualification\": string(\"Liaison\"),\n+ \t\t\t\"qualification\": string(\"Agent\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 45": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Ludwig\"),\n- \t\t\t\"lastName\":      string(\"Douglas\"),\n+ \t\t\t\"lastName\":      string(\"Ankunding\"),\n- \t\t\t\"qualification\": string(\"Technician\"),\n+ \t\t\t\"qualification\": string(\"Consultant\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ],
+        "Graphql Scenario 48": [
+            {
+                "Field": "",
+                "Expected": null,
+                "Got": null,
+                "RootCause": "  map[string]interface{}{\n  \t\"data\": map[string]interface{}{\n  \t\t\"teacher\": map[string]interface{}{\n  \t\t\t\"firstName\":     string(\"Sincere\"),\n- \t\t\t\"lastName\":      string(\"Goodwin\"),\n+ \t\t\t\"lastName\":      string(\"Bradtke\"),\n- \t\t\t\"qualification\": string(\"Analyst\"),\n+ \t\t\t\"qualification\": string(\"Representative\"),\n  \t\t},\n  \t},\n  }\n",
+                "Trace": "data mismatch (-)want, (+) got"
+            }
+        ]
+    }
+}
