@@ -2,7 +2,7 @@
     "tests": [
         {
             "scenario": "Graphql Scenario 1",
-            "ignore": false,
+            "ignore": true,
             "type": "graphQL",
             "url": "http://localhost:9090/query",
             "method": "POST",

@@ -1,0 +1,154 @@
+{
+    "FileName": "go_test_it_reg_12.json",
+    "TestResults": {
+        "Ignored": null,
+        "Passed": {
+            "Graphql Scenario 1": "PASSED",
+            "Graphql Scenario 10": "PASSED",
+            "Graphql Scenario 11": "PASSED",
+            "Graphql Scenario 13": "PASSED",
+            "Graphql Scenario 16": "PASSED",
+            "Graphql Scenario 17": "PASSED",
+            "Graphql Scenario 18": "PASSED",
+            "Graphql Scenario 19": "PASSED",
+            "Graphql Scenario 2": "PASSED",
+            "Graphql Scenario 22": "PASSED",
+            "Graphql Scenario 23": "PASSED",
+            "Graphql Scenario 24": "PASSED",
+            "Graphql Scenario 25": "PASSED",
+            "Graphql Scenario 26": "PASSED",
+            "Graphql Scenario 27": "PASSED",
+            "Graphql Scenario 3": "PASSED",
+            "Graphql Scenario 30": "PASSED",
+            "Graphql Scenario 32": "PASSED",
+            "Graphql Scenario 33": "PASSED",
+            "Graphql Scenario 34": "PASSED",
+            "Graphql Scenario 35": "PASSED",
+            "Graphql Scenario 36": "PASSED",
+            "Graphql Scenario 38": "PASSED",
+            "Graphql Scenario 39": "PASSED",
+            "Graphql Scenario 4": "PASSED",
+            "Graphql Scenario 41": "PASSED",
+            "Graphql Scenario 42": "PASSED",
+            "Graphql Scenario 43": "PASSED",
+            "Graphql Scenario 44": "PASSED",
+            "Graphql Scenario 45": "PASSED",
+            "Graphql Scenario 46": "PASSED",
+            "Graphql Scenario 47": "PASSED",
+            "Graphql Scenario 48": "PASSED",
+            "Graphql Scenario 49": "PASSED",
+            "Graphql Scenario 5": "PASSED",
+            "Graphql Scenario 50": "PASSED",
+            "Graphql Scenario 6": "PASSED",
+            "Graphql Scenario 7": "PASSED",
+            "Graphql Scenario 8": "PASSED",
+            "Graphql Scenario 9": "PASSED"
+        },
+        "Failed": {
+            "Graphql Scenario 12": "FAILED",
+            "Graphql Scenario 14": "FAILED",
+            "Graphql Scenario 15": "FAILED",
+            "Graphql Scenario 20": "FAILED",
+            "Graphql Scenario 21": "FAILED",
+            "Graphql Scenario 28": "FAILED",
+            "Graphql Scenario 29": "FAILED",
+            "Graphql Scenario 31": "FAILED",
+            "Graphql Scenario 37": "FAILED",
+            "Graphql Scenario 40": "FAILED"
+        }
+    },
+    "Ignored": 0,
+    "ResponseTime": 0,
+    "Errors": {
+        "Graphql Scenario 12": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Consultant",
+                "Got": "BA.PE",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 14": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Agent",
+                "Got": "Representative",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 15": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Producer",
+                "Got": "Director",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 20": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Administrator",
+                "Got": "Coordinator",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 21": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Analyst",
+                "Got": "Agent",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 28": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Facilitator",
+                "Got": "Liaison",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 29": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Orchestrator",
+                "Got": "Director",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 31": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Liaison",
+                "Got": "Director",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 37": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Designer",
+                "Got": "Administrator",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "Graphql Scenario 40": [
+            {
+                "Path": "root[\"data\"].(map[string]interface {})[\"teacher\"].(map[string]interface {})[\"qualification\"].(string)",
+                "Expected": "Architect",
+                "Got": "Supervisor",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ]
+    }
+}

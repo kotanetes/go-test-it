@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kotanetes/go-test-it/model"
+	model "github.com/kotanetes/go-test-it/model2"
 )
 
 func init() {
@@ -14,24 +14,29 @@ func init() {
 func Test_GenerateReports(t *testing.T) {
 	fr.Store("test.json")
 	GenerateReport()
-	_, err := os.Stat("./results/")
+	_, err := os.Stat("./reports/")
 	if err != nil {
 		t.Fatal(err)
 	}
-	os.RemoveAll("./results/")
+	os.RemoveAll("./reports/")
 }
 
 func Test_PrintResults(t *testing.T) {
 	fileName := "test.file"
-	ignored := 0
-	result := map[string]bool{
-		"test 1": true,
-		"test 2": false,
+	result := map[string]string{
+		"test 1": model.Passed,
+		"test 2": model.Passed,
 	}
 
-	hr := model.HTTPResult{TestResults: result, Ignored: ignored}
+	hr := model.TestModel{}
+	hr.TestResults.Passed = result
 
 	PrintResults(fileName, hr)
+	_, err := os.Stat("./file_results/")
+	if err != nil {
+		t.Fatal(err)
+	}
+	os.RemoveAll("./file_results/")
 }
 
 func Test_InitJSONFile(t *testing.T) {

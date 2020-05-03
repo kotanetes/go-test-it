@@ -41,4 +41,11 @@ Installation instructions are listed below.
   * Tool generates results as a HTMl Report,Pie Chart and also prints the results to console
     
     ![Screenshot](Screen_Shot.png)
+    
+   * Tool also generate the JSON Results of all scenarios per file, So that User can go through errors.
+     Examples are available [here](./regression/file_results/)
+     * [Ignored Results](./regression/file_results/result_go_test_it_reg_1.json#L4)
+     * [Passed Results](./regression/file_results/result_go_test_it_reg_1.json#L7)
+     * [Failed Results](./regression/file_results/result_go_test_it_reg_1.json#L56)
+     * [Errors](./regression/file_results/result_go_test_it_reg_1.json#L63)
   

@@ -1,0 +1,37 @@
+{
+    "FileName": "example_copy.json",
+    "TestResults": {
+        "Ignored": {
+            "GraphQL Test": "IGNORED"
+        },
+        "Passed": {
+            "Dummy REST Service": "PASSED"
+        },
+        "Failed": {
+            "JSON Parser Test1": "FAILED",
+            "JSON Parser Test2": "FAILED"
+        }
+    },
+    "Ignored": 0,
+    "ResponseTime": 0,
+    "Errors": {
+        "JSON Parser Test1": [
+            {
+                "Path": "root[\"status\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "success",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "JSON Parser Test2": [
+            {
+                "Path": "root[\"status\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "success",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ]
+    }
+}

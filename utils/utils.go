@@ -8,7 +8,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/kotanetes/go-test-it/model"
+	model "github.com/kotanetes/go-test-it/model2"
 	"github.com/sirupsen/logrus"
 	"github.com/wcharczuk/go-chart"
 	"github.com/wcharczuk/go-chart/drawing"
@@ -19,8 +19,8 @@ import (
 type Stats struct {
 	FileName string
 	Total    int
-	Passed   int32
-	Failed   int32
+	Passed   int
+	Failed   int
 	Ignored  int
 	Status   string
 }
@@ -38,41 +38,36 @@ func (s *Stats) ReadAll() map[string]Stats {
 var (
 	d              = make(map[string]Stats, 0)
 	fr             Stats
-	passed, failed int32
+	passed, failed int
 	ignored        int
 )
 
 // PrintResults evaluates and prints final results based on the given data.
-func PrintResults(fileName string, result model.HTTPResult) {
+func PrintResults(fileName string, result model.TestModel) {
 
 	var (
-		total      int
-		pass, fail int32
+		total, pass, fail, ignore int
 	)
 
-	if result.Ignored > 0 {
-		ignored += result.Ignored
+	if len(result.TestResults.Ignored) > 0 {
+		ignore = len(result.TestResults.Ignored)
+		ignored += len(result.TestResults.Ignored)
 	}
 
-	total = len(result.TestResults) + result.Ignored
+	pass = len(result.TestResults.Passed)
+	passed += pass
+	fail = len(result.TestResults.Failed)
+	failed += fail
 
-	for _, v := range result.TestResults {
-		if v {
-			passed++
-			pass++
-		} else {
-			failed++
-			fail++
-		}
-	}
+	total = pass + fail + ignore
 	fmt.Println("##############################################")
-	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, pass, fail, result.Ignored)
+	fmt.Printf("Total Tests:%v, Passed:%v, Failed:%v, Ignored:%v\n", total, pass, fail, ignore)
 	fmt.Println("##############################################")
 
 	fr.FileName = fileName
 	fr.Total = total
 	fr.Failed = fail
-	fr.Ignored = result.Ignored
+	fr.Ignored = ignore
 	fr.Passed = pass
 	fr.Status = "PASSED"
 
@@ -81,6 +76,30 @@ func PrintResults(fileName string, result model.HTTPResult) {
 	}
 
 	fr.Store(fileName)
+
+	path := "./file_results/"
+
+	if _, err := os.Stat("./file_results/"); err != nil {
+		logrus.Error(err)
+		if err = os.Mkdir("file_results", os.ModePerm); err != nil {
+			logrus.Fatal(err)
+		}
+	}
+
+	file := path + "result_" + result.FileName
+	f, err := os.Create(file)
+	if err != nil {
+		logrus.Error(err)
+	}
+	defer f.Close()
+	tResult, err := json.MarshalIndent(result.HTTPResult, "", "    ")
+	if err != nil {
+		logrus.Error(err)
+	}
+	_, err = f.Write(tResult)
+	if err != nil {
+		logrus.Error(err)
+	}
 
 }
 
@@ -96,11 +115,11 @@ func GenerateReport() {
 		status string
 		d      data
 	)
-	path := "./results/"
+	path := "./reports/"
 
-	if _, err := os.Stat("./results/"); err != nil {
+	if _, err := os.Stat("./reports/"); err != nil {
 		logrus.Error(err)
-		if err = os.Mkdir("results", os.ModePerm); err != nil {
+		if err = os.Mkdir("reports", os.ModePerm); err != nil {
 			logrus.Fatal(err)
 		}
 	}
@@ -175,7 +194,7 @@ func InitJSONFile() {
 			Type:     "REST",
 			URL:      "http://sample-url.domain.com/users",
 			Method:   "POST",
-			Header: model.Header{
+			Header: model.AuthHeader{
 				Authorization: "Basic e1f4g5dew==",
 				ContentType:   "application/json",
 			},
@@ -194,7 +213,7 @@ func InitJSONFile() {
 			Type:     "REST",
 			URL:      "http://sample-url.domain.com/users?id=123456",
 			Method:   "GET",
-			Header: model.Header{
+			Header: model.AuthHeader{
 				Authorization: "Basic e1f4g5dew==",
 				ContentType:   "application/json",
 			},

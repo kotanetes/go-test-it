@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/kotanetes/go-test-it/model"
+	model "github.com/kotanetes/go-test-it/model2"
 	"github.com/kotanetes/go-test-it/service"
 	"github.com/kotanetes/go-test-it/utils"
 	"github.com/sirupsen/logrus"
@@ -25,7 +25,7 @@ func init() {
 	logrus.SetOutput(os.Stdout)
 
 	// Only log the warning severity or above.
-	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetLevel(logrus.InfoLevel)
 
 	// intializing remote service
 	service.InitHTTPClient(&http.Client{})
@@ -34,13 +34,19 @@ func init() {
 // variables used for flag arguments
 var (
 	filePath, fileName, scenarioName *string
+	debugMode                        *bool
 )
 
 func main() {
 
 	filePath = flag.String("file-path", "./", "Path to Test Files.")
-	fileName = flag.String("file-name", "", "Name Of Test Files.")
+	fileName = flag.String("file-name", "", "Name of Test Files.")
 	scenarioName = flag.String("scenario-name", "all", "Tests a specific scenario.")
+	debugMode = flag.Bool("d", false, "debug logs console")
+
+	if *debugMode {
+		logrus.SetLevel(logrus.DebugLevel)
+	}
 
 	args := os.Args[1:]
 
@@ -75,7 +81,7 @@ func main() {
 				if err != nil {
 					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
-				result, err := handleTests(data)
+				result, err := handleTests(data, fileName)
 				if err != nil {
 					logrus.WithField("file-name", file.Name()).Fatal(err)
 				}
@@ -95,7 +101,7 @@ func handleSpecificFile(path, fileName string) {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	result, err := handleTests(data)
+	result, err := handleTests(data, fileName)
 	if err != nil {
 		logrus.Fatal(err)
 	}
@@ -105,13 +111,14 @@ func handleSpecificFile(path, fileName string) {
 
 // handleTests unmarshals byte data to TestModel type and pass the scenarios
 // to MakeHTTPCall function that makes calls to URL mentioned in tests.
-func handleTests(data []byte) (result model.HTTPResult, err error) {
+func handleTests(data []byte, name string) (result model.TestModel, err error) {
 	var scenarios model.TestModel
 	err = json.Unmarshal(data, &scenarios)
 	if err != nil {
 		return result, err
 	}
-	result, err = service.MakeHTTPCall(scenarios.Test)
+	scenarios.SetFileName(name)
+	result, err = service.MakeHTTPCall(scenarios)
 	return result, err
 }
 

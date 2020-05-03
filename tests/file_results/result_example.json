@@ -1,0 +1,93 @@
+{
+    "FileName": "example.json",
+    "TestResults": {
+        "Ignored": {
+            "sample test 11": "IGNORED",
+            "sample test 12": "IGNORED",
+            "sample test 14": "IGNORED",
+            "sample test 3": "IGNORED",
+            "sample test 4": "IGNORED",
+            "sample test 7": "IGNORED",
+            "sample test 8": "IGNORED"
+        },
+        "Passed": {
+            "sample test 1": "PASSED"
+        },
+        "Failed": {
+            "sample test 10": "FAILED",
+            "sample test 13": "FAILED",
+            "sample test 2": "FAILED",
+            "sample test 3": "FAILED",
+            "sample test 5": "FAILED",
+            "sample test 6": "FAILED",
+            "sample test 9": "FAILED"
+        }
+    },
+    "Ignored": 0,
+    "ResponseTime": 0,
+    "Errors": {
+        "sample test 10": [
+            {
+                "Path": "root[\"status\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "success",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 13": [
+            {
+                "Path": "root[\"userId\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "1",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 2": [
+            {
+                "Path": "root[\"status\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "success",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 3": [
+            {
+                "Path": "root[\"userId\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "1",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 5": [
+            {
+                "Path": "root[\"userId\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "1",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 6": [
+            {
+                "Path": "root[\"status\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "success",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ],
+        "sample test 9": [
+            {
+                "Path": "root[\"userId\"]",
+                "Expected": "\u003cinvalid reflect.Value\u003e",
+                "Got": "1",
+                "RootCause": "data mismatch",
+                "Trace": ""
+            }
+        ]
+    }
+}
