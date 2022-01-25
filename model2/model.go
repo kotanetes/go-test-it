@@ -269,7 +269,7 @@ func (s *TestScenario) CompareData() (bool, []Error) {
 
 	isValid := true
 	logrus.WithField("scenario", s.Scenario).Info("Comparing Data")
-	if !cmp.Equal(s.ExpectedResult, s.ReturnedResult, cmp.Reporter(&r)) {
+	if s.ExpectedResult != nil && !cmp.Equal(s.ExpectedResult, s.ReturnedResult, cmp.Reporter(&r)) {
 		logrus.WithField("scenario", s.Scenario).Info("Failed - data mismatch")
 		isValid = false
 		errors = append(errors, Error{Path: r.getPath(), Expected: r.getExpected(), Got: r.returnGot(), RootCause: "data mismatch"})
