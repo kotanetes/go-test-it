@@ -135,7 +135,7 @@ func GenerateReport() {
 			},
 		}
 
-		resultFile := fmt.Sprintf(path + "results_pie_chart.png")
+		resultFile := path + "results_pie_chart.png"
 
 		f, err := os.Create(resultFile)
 		if err != nil {
